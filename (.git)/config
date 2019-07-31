@@ -1,0 +1,14 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://gitlab.linphone.org/BC/public/linphone-android.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[remote "github"]
+	url = https://github.com/angrinord/VikingComm-Android.git
+	fetch = +refs/heads/*:refs/remotes/github/*

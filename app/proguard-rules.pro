@@ -1,0 +1,2 @@
+-dontwarn org.apache.**
+-ignorewarnings

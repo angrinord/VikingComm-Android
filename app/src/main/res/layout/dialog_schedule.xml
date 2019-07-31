@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_schedule_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
+
+    <TextView
+        android:id="@+id/dialog_schedule_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="165dp"
+        android:layout_marginEnd="165dp"
+        android:paddingBottom="10dp"
+        android:text="Block Calls"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_schedule_title">
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".27"
+            android:text="from"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/start_time_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="HH"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/start_time_minute"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="MM"
+            android:inputType="number" />
+
+        <Spinner
+            android:id="@+id/am_pm1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".025"
+            android:background="@null"
+            android:entries="@array/am_pm"
+            android:spinnerMode="dialog"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".27"
+            android:text="to"
+            android:textAlignment="center" />
+
+        <EditText
+            android:id="@+id/end_time_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="HH"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+id/end_time_minute"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="MM"
+            android:inputType="number" />
+
+        <Spinner
+            android:id="@+id/am_pm2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight=".025"
+            android:background="@null"
+            android:entries="@array/am_pm"
+            android:spinnerMode="dialog"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/day_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="15dp"
+        android:background="@color/toolbar_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/back_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+        <ToggleButton
+            android:id="@+id/Sunday"
+            style="@style/day_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="?attr/button_background_drawable"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <ToggleButton
+            android:id="@+id/Monday"
+            style="@style/day_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="?attr/button_background_drawable"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <ToggleButton
+            android:id="@+id/Tuesday"
+            style="@style/day_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="?attr/button_background_drawable"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <ToggleButton
+            android:id="@+id/Wednesday"
+            style="@style/day_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="?attr/button_background_drawable"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <ToggleButton
+            android:id="@+id/Thursday"
+            style="@style/day_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="?attr/button_background_drawable"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <ToggleButton
+            android:id="@+id/Friday"
+            style="@style/day_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="?attr/button_background_drawable"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+        <ToggleButton
+            android:id="@+id/Saturday"
+            style="@style/day_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:background="?attr/button_background_drawable"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/back_button"
+        style="@style/dialog_cancel_button_font"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/resizable_assistant_button"
+        android:text="@string/cancel"
+        app:layout_constraintEnd_toStartOf="@+id/next_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+    <Button
+        android:id="@+id/next_button"
+        android:textColor="@color/dark_grey_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="26dp"
+        android:background="@drawable/resizable_assistant_button"
+        android:backgroundTint="@color/button_color"
+        android:text="Set"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/back_button"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
