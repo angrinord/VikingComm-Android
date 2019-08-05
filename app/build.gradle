@@ -70,7 +70,7 @@ android {
 
     compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 2007
         versionName "0.2.7"
