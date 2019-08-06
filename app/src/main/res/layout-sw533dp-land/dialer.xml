@@ -4,19 +4,12 @@
     android:layout_height="match_parent"
     android:background="@color/grey_color">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_centerVertical="true"
-        android:src="@drawable/dialer_background" />
-
     <RelativeLayout
         android:id="@+id/dialer"
-        android:layout_width="300dp"
-        android:layout_height="460dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="50dp"
         android:background="?attr/backgroundColor">
 
         <RelativeLayout

@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <fragment
         android:id="@+id/status"
@@ -190,6 +191,31 @@
                         android:layout_height="match_parent"
                         android:layout_alignParentLeft="true"
                         android:background="?attr/accentColor" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/schedule"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/footer_button">
+
+                    <ImageView
+                        app:srcCompat="@drawable/calendar_icon"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:contentDescription="@string/content_description_dialer"
+                        android:padding="14dp" />
+
+                    <View
+                        android:id="@+id/schedule_select"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/primary_color"
+                        android:visibility="gone" />
 
                 </RelativeLayout>
 

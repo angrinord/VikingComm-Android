@@ -484,15 +484,6 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
         }
     }
 
-    public void subscribeFriendList(boolean enabled) {
-        Core lc = getLcIfManagerNotDestroyedOrNull();
-        if (lc != null && lc.getFriendsLists() != null && lc.getFriendsLists().length > 0) {
-            FriendList friendList = (lc.getFriendsLists())[0];
-            Log.i("[Manager] Presence list subscription is " + (enabled ? "enabled" : "disabled"));
-            friendList.enableSubscriptions(enabled);
-        }
-    }
-
     public void newOutgoingCall(AddressType address) {
         String to = address.getText().toString();
         newOutgoingCall(to, address.getDisplayedName());
@@ -1009,14 +1000,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
         }
     }
 
-    private void createNotification(
-            ChatRoom cr,
-            LinphoneContact contact,
-            Address from,
-            String textMessage,
-            long time,
-            Uri file,
-            String mime) {
+    private void createNotification(ChatRoom cr, LinphoneContact contact, Address from, String textMessage, long time, Uri file, String mime) {
         if (cr.hasCapability(ChatRoomCapabilities.OneToOne.toInt())) {
             if (contact != null) {
                 LinphoneService.instance()
@@ -1100,11 +1084,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
         }
     }
 
-    public void onRegistrationStateChanged(
-            final Core lc,
-            final ProxyConfig proxy,
-            final RegistrationState state,
-            final String message) {
+    public void onRegistrationStateChanged(final Core lc, final ProxyConfig proxy, final RegistrationState state, final String message) {
         Log.i("[Manager] New registration state [" + state + "]");
 
         if (state == RegistrationState.Failed) {
@@ -1159,8 +1139,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
     }
 
     @SuppressLint("Wakelock")
-    public void onCallStateChanged(
-            final Core lc, final Call call, final State state, final String message) {
+    public void onCallStateChanged(final Core lc, final Call call, final State state, final String message) {
         Log.i("[Manager] New call state [", state, "]");
         SharedPreferences prefs = mServiceContext.getSharedPreferences("snooze",Context.MODE_PRIVATE);
         boolean inSnooze = prefs.getBoolean("inSnooze", false);
@@ -1301,8 +1280,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
     @Override
     public void onQrcodeFound(Core lc, String result) {}
 
-    public void onCallEncryptionChanged(
-            Core lc, Call call, boolean encrypted, String authenticationToken) {}
+    public void onCallEncryptionChanged(Core lc, Call call, boolean encrypted, String authenticationToken) {}
 
     public void startEcCalibration() {
         routeAudioToSpeaker();
@@ -1685,8 +1663,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
     }
 
     @Override
-    public void onVersionUpdateCheckResultReceived(
-            Core lc, VersionUpdateCheckResult result, String version, String url) {
+    public void onVersionUpdateCheckResultReceived(Core lc, VersionUpdateCheckResult result, String version, String url) {
         if (result == VersionUpdateCheckResult.NewVersionAvailable) {
             final String urlToUse = url;
             final String versionAv = version;
@@ -1741,8 +1718,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
     }
 
     @Override
-    public void onLogCollectionUploadStateChanged(
-            Core linphoneCore, LogCollectionUploadState state, String info) {
+    public void onLogCollectionUploadStateChanged(Core linphoneCore, LogCollectionUploadState state, String info) {
         Log.d("[Manager] Log upload state: " + state.toString() + ", info = " + info);
         if (state == LogCollectionUploadState.Delivered) {
             ClipboardManager clipboard =
@@ -1783,63 +1759,52 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
     }
 
     @Override
-    public void onNotifyPresenceReceivedForUriOrTel(
-            Core lc, Friend lf, String uri_or_tel, PresenceModel presence_model) {}
+    public void onNotifyPresenceReceivedForUriOrTel(Core lc, Friend lf, String uri_or_tel, PresenceModel presence_model) {}
 
     @Override
     public void onBuddyInfoUpdated(Core lc, Friend lf) {}
 
     @Override
-    public void onIsAccountExist(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {
+    public void onIsAccountExist(AccountCreator accountCreator, AccountCreator.Status status, String resp) {
         if (status.equals(AccountCreator.Status.AccountExist)) {
             accountCreator.isAccountLinked();
         }
     }
 
     @Override
-    public void onCreateAccount(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+    public void onCreateAccount(AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
 
     @Override
-    public void onActivateAccount(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+    public void onActivateAccount(AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
 
     @Override
-    public void onLinkAccount(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {
+    public void onLinkAccount(AccountCreator accountCreator, AccountCreator.Status status, String resp) {
         if (status.equals(AccountCreator.Status.AccountNotLinked)) {
             askLinkWithPhoneNumber();
         }
     }
 
     @Override
-    public void onActivateAlias(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+    public void onActivateAlias(AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
 
     @Override
-    public void onIsAccountActivated(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+    public void onIsAccountActivated(AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
 
     @Override
-    public void onRecoverAccount(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+    public void onRecoverAccount(AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
 
     @Override
-    public void onIsAccountLinked(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {
+    public void onIsAccountLinked(AccountCreator accountCreator, AccountCreator.Status status, String resp) {
         if (status.equals(AccountCreator.Status.AccountNotLinked)) {
             askLinkWithPhoneNumber();
         }
     }
 
     @Override
-    public void onIsAliasUsed(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+    public void onIsAliasUsed(AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
 
     @Override
-    public void onUpdateAccount(
-            AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+    public void onUpdateAccount(AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
 
     private void updateMissedChatCount() {
         for (ChatRoom cr : LinphoneManager.getLc().getChatRooms()) {
@@ -1855,8 +1820,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
         return count;
     }
 
-    public void updateUnreadCountForChatRoom(
-            String localSipUri, String remoteSipUri, Integer value) {
+    public void updateUnreadCountForChatRoom(String localSipUri, String remoteSipUri, Integer value) {
         String key = localSipUri + "//" + remoteSipUri;
         mUnreadChatsPerRoom.put(key, value);
     }

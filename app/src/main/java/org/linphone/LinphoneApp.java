@@ -21,7 +21,7 @@ import org.joda.time.LocalTime;
 import org.linphone.receivers.StartServiceReceiver;
 import org.linphone.receivers.StopServiceReceiver;
 
-public class LinphoneApp extends Application {
+public class LinphoneApp extends Application{
     private LinkedList<ScheduleObject> schedule;
 
     @Override

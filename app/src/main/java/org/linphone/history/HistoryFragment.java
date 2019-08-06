@@ -48,12 +48,7 @@ import org.linphone.core.Call;
 import org.linphone.core.CallLog;
 import org.linphone.utils.SelectableHelper;
 
-public class HistoryFragment extends Fragment
-        implements OnClickListener,
-                OnItemClickListener,
-                HistoryViewHolder.ClickListener,
-                   ContactsUpdatedListener,
-                SelectableHelper.DeleteListener {
+public class HistoryFragment extends Fragment implements OnClickListener, OnItemClickListener, HistoryViewHolder.ClickListener, ContactsUpdatedListener, SelectableHelper.DeleteListener {
     private RecyclerView mHistoryList;
     private TextView mNoCallHistory, mNoMissedCallHistory;
     private ImageView mMissedCalls, mAllCalls;

@@ -87,9 +87,7 @@ public class NotificationsManager {
                 PendingIntent.getActivity(
                         mContext, SERVICE_NOTIF_ID, notifIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mServiceNotification =
-                Compatibility.createNotification(
-                        mContext,
-                        mContext.getString(R.string.service_name),
+                Compatibility.createNotification(mContext, mContext.getString(R.string.service_name),
                         "",
                         R.drawable.linphone_notification_icon,
                         R.mipmap.ic_launcher,
@@ -153,16 +151,7 @@ public class NotificationsManager {
         return null;
     }
 
-    public void displayGroupChatMessageNotification(
-            String subject,
-            String conferenceAddress,
-            String fromName,
-            Uri fromPictureUri,
-            String message,
-            Address localIdentity,
-            long timestamp,
-            Uri filePath,
-            String fileMime) {
+    public void displayGroupChatMessageNotification(String subject, String conferenceAddress, String fromName, Uri fromPictureUri, String message, Address localIdentity, long timestamp, Uri filePath, String fileMime) {
 
         Bitmap bm = ImageUtils.getRoundBitmapFromUri(mContext, fromPictureUri);
         Notifiable notif = mChatNotifMap.get(conferenceAddress);
@@ -205,15 +194,7 @@ public class NotificationsManager {
         sendNotification(notif.getNotificationId(), notification);
     }
 
-    public void displayMessageNotification(
-            String fromSipUri,
-            String fromName,
-            Uri fromPictureUri,
-            String message,
-            Address localIdentity,
-            long timestamp,
-            Uri filePath,
-            String fileMime) {
+    public void displayMessageNotification(String fromSipUri, String fromName, Uri fromPictureUri, String message, Address localIdentity, long timestamp, Uri filePath, String fileMime) {
         if (fromName == null) {
             fromName = fromSipUri;
         }

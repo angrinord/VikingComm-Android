@@ -23,6 +23,7 @@ import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.Gravity;
@@ -145,11 +146,6 @@ public class ScheduleFragment extends Fragment implements OnClickListener, OnIte
 
         return view;
     }
-
-    private void timerStartStop(){
-
-    }
-
 
     public void updateSnoozeTimer(long remaining){
         int minutes = (int) remaining/60000;
@@ -309,24 +305,42 @@ public class ScheduleFragment extends Fragment implements OnClickListener, OnIte
                             @Override
                             public void onClick(View v) {
                                 String toastMessage = getString(R.string.invalid_schedule_time);
-
                                 //Choose interval start
                                 if(!isSecond[0]){
-                                    int beginningHour = picker.getHour();
-                                    int beginningMinute = picker.getMinute();
+                                    int beginningHour = 0;
+                                    int beginningMinute = 0;
+                                    if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M){
+                                        beginningHour = picker.getHour();
+                                        beginningMinute = picker.getMinute();
+                                    } else{
+                                        beginningHour = picker.getCurrentHour();
+                                        beginningMinute = picker.getCurrentMinute();
+                                    }
                                     t1[0]=new LocalTime(beginningHour, beginningMinute);
                                     ((Button)v).setText(getString(R.string.set));
                                     ((TextView)d.findViewById(R.id.info_text)).setText(String.format("Block calls from %s to", LinphoneApp.parseTime(t1[0])));
                                     isSecond[0] = true;
-                                    picker.setHour(0);
-                                    picker.setMinute(0);
+                                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                                        picker.setHour(0);
+                                        picker.setMinute(0);
+                                    } else{
+                                        picker.setCurrentHour(0);
+                                        picker.setCurrentMinute(0);
+                                    }
                                     d.findViewById(R.id.day_buttons).setVisibility(View.VISIBLE);
                                 }
                                 //Choose interval end
                                 else{
                                     try{
-                                        int endingHour = picker.getHour();
-                                        int endingMinute = picker.getMinute();
+                                        int endingHour = 0;
+                                        int endingMinute = 0;
+                                        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M){
+                                            endingHour = picker.getHour();
+                                            endingMinute = picker.getMinute();
+                                        } else{
+                                            endingHour = picker.getCurrentHour();
+                                            endingMinute = picker.getCurrentMinute();
+                                        }
                                         LocalTime t2 = new LocalTime(endingHour,endingMinute);
                                         ScheduleInterval interval = new ScheduleInterval(t1[0], t2);
 
@@ -381,14 +395,18 @@ public class ScheduleFragment extends Fragment implements OnClickListener, OnIte
         (d.findViewById(R.id.back_button)).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 //Change interval start
                 if(isSecond[0]){
                     ((Button)d.findViewById(R.id.next_button)).setText(getString(R.string.next));
                     ((TextView)d.findViewById(R.id.info_text)).setText(getString(R.string.Block_calls_from));
                     isSecond[0] = false;
-                    picker.setHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
-                    picker.setMinute(Calendar.getInstance().get(Calendar.MINUTE));
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        picker.setHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+                        picker.setMinute(Calendar.getInstance().get(Calendar.MINUTE));
+                    } else{
+                        picker.setCurrentHour(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+                        picker.setCurrentMinute(Calendar.getInstance().get(Calendar.MINUTE));
+                    }
                     t1[0]=null;
                     d.findViewById(R.id.day_buttons).setVisibility(View.GONE);
                 }

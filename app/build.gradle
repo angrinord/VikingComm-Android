@@ -70,13 +70,14 @@ android {
 
     compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
-        versionCode 2007
-        versionName "0.2.7"
+        versionCode 2009
+        versionName "0.2.9"
         applicationId getPackageName()
         multiDexEnabled true
         manifestPlaceholders = [linphone_address_mime_type:"vnd.android.cursor.item/vnd." + getPackageName() + ".provider.sip_address"]
+        vectorDrawables.useSupportLibrary = true
     }
 
     applicationVariants.all { variant ->
@@ -163,7 +164,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
     println("ANTHONY")
-    implementation 'com.google.firebase:firebase-messaging:19.0.1'
+    // implementation 'com.google.firebase:firebase-messaging:19.0.1'
     if (isLocalAarAvailable()) {
         println("isLocalAarAvailable = " + isLocalAarAvailable())
         if (isLocalReleaseAarAvailable()) {

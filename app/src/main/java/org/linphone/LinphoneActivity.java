@@ -448,6 +448,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
             // Prevent fragmentContainer2 to be visible when rotating the device
             LinearLayout ll = findViewById(R.id.fragmentContainer2);
             if (mCurrentFragment == FragmentsAvailable.DIALER
+                    || mCurrentFragment == FragmentsAvailable.SCHEDULE_LIST
                     || mCurrentFragment == FragmentsAvailable.ABOUT
                     || mCurrentFragment == FragmentsAvailable.SETTINGS
                     || mCurrentFragment == FragmentsAvailable.SETTINGS_SUBLEVEL
@@ -931,6 +932,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
                 }
 
                 if (newFragmentType == FragmentsAvailable.DIALER
+                        || newFragmentType == FragmentsAvailable.SCHEDULE_LIST
                         || newFragmentType == FragmentsAvailable.ABOUT
                         || newFragmentType == FragmentsAvailable.SETTINGS
                         || newFragmentType == FragmentsAvailable.ACCOUNT_SETTINGS

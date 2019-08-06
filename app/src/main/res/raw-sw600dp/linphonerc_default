@@ -1,12 +1,12 @@
-[net]
-download_bw=512
-upload_bw=512
-
 [sip]
 contact="Viking Android" <sip:viking.android@unknown-host>
 use_info=0
 use_ipv6=0
 keepalive_period=30000
+sip_port=-1
+sip_tcp_port=-1
+sip_tls_port=-1
+media_encryption=none
 
 [video]
 size=vga
@@ -14,7 +14,7 @@ size=vga
 [app]
 tunnel=disabled
 push_notification=1
-debug=0
+auto_start=1
 
 [tunnel]
 host=
@@ -23,3 +23,7 @@ port=443
 [misc]
 log_collection_upload_server_url=https://www.linphone.org:444/lft.php
 file_transfer_server_url=https://www.linphone.org:444/lft.php
+
+[net]
+download_bw=512
+upload_bw=512
