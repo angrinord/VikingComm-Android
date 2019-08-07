@@ -35,7 +35,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -499,9 +498,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
             return;
         }
 
-        boolean isLowBandwidthConnection =
-                !LinphoneUtils.isHighBandwidthConnection(
-                        LinphoneService.instance().getApplicationContext());
+        boolean isLowBandwidthConnection = !LinphoneUtils.isHighBandwidthConnection(LinphoneService.instance().getApplicationContext());
 
         if (mCore.isNetworkReachable()) {
             if (Version.isVideoCapable()) {
@@ -1141,10 +1138,8 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
     @SuppressLint("Wakelock")
     public void onCallStateChanged(final Core lc, final Call call, final State state, final String message) {
         Log.i("[Manager] New call state [", state, "]");
-        SharedPreferences prefs = mServiceContext.getSharedPreferences("snooze",Context.MODE_PRIVATE);
-        boolean inSnooze = prefs.getBoolean("inSnooze", false);
         boolean shouldAcceptCalls = mServiceContext.shouldAcceptCalls();
-        if (!shouldAcceptCalls || inSnooze) {
+        if (!shouldAcceptCalls&&(state == State.IncomingReceived || state == State.IncomingEarlyMedia)) {
             LinphoneManager.getLc().terminateCall(call);
             ((LinphoneService) mServiceContext).close();
             return;

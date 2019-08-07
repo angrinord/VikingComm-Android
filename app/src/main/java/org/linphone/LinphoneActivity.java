@@ -230,7 +230,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
 
         setContentView(R.layout.main);
         sInstance = this;
-        mPendingFragmentTransaction = FragmentsAvailable.UNKNOW;
+        mPendingFragmentTransaction = FragmentsAvailable.UNKNOWN;
 
         initButtons();
         initSideMenu();
@@ -488,10 +488,10 @@ public class LinphoneActivity extends LinphoneGenericActivity
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        if (mPendingFragmentTransaction != FragmentsAvailable.UNKNOW) {
+        if (mPendingFragmentTransaction != FragmentsAvailable.UNKNOWN) {
             changeCurrentFragment(mPendingFragmentTransaction, null);
             selectMenu(mPendingFragmentTransaction);
-            mPendingFragmentTransaction = FragmentsAvailable.UNKNOW;
+            mPendingFragmentTransaction = FragmentsAvailable.UNKNOWN;
         }
     }
 

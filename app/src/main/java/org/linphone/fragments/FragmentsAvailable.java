@@ -20,7 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 public enum FragmentsAvailable {
-    UNKNOW,
+    UNKNOWN,
     DIALER,
     EMPTY,
     HISTORY_LIST,

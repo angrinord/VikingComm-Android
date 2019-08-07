@@ -160,8 +160,8 @@ public final class LinphoneService extends Service {
 
     private void onBackgroundMode() {
         Log.i("[Service] App has entered background mode");
-        SharedPreferences prefs = this.getSharedPreferences("snooze", Context.MODE_PRIVATE);
-        if(!shouldAcceptCalls() || prefs.getBoolean("inSnooze", false)){
+
+        if(!shouldAcceptCalls()){
             stopSelf();
         }
         if (LinphoneManager.getLcIfManagerNotDestroyedOrNull() != null) {
@@ -585,7 +585,9 @@ public final class LinphoneService extends Service {
                 shouldAcceptCall = false;
             }
         }
-        return shouldAcceptCall;
+        SharedPreferences prefs = getApplicationContext().getSharedPreferences("snooze",Context.MODE_PRIVATE);
+        prefs.getBoolean("inSnooze", false);
+        return shouldAcceptCall&&!prefs.getBoolean("inSnooze", false);
     }
 
     //TODO Likely not needed

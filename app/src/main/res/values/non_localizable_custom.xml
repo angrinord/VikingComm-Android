@@ -20,7 +20,7 @@
     <string name="temp_photo_name_with_date" translatable="false">linphone-android-photo-%s</string>
     <string name="about_text" translatable="false">GNU General Public License V2\n © 2018–2019
         Viking Softphone</string>
-    <string name="about_bugreport_email" translatable="false">info@vikingelectronics.com</string>
+    <string name="about_bugreport_email" translatable="false">androidlogs@vikingelectronics.com</string>
     <string name="notification_service_channel_id" translatable="false">linphone_notification_service_id</string>
     <string name="notification_channel_id" translatable="false">linphone_notification_id</string>
 

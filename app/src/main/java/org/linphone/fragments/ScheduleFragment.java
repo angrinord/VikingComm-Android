@@ -246,12 +246,11 @@ public class ScheduleFragment extends Fragment implements OnClickListener, OnIte
                 try {
                     mSchedules.get(position).toggleActive();
                     ((LinphoneApp) getActivity().getApplication()).serializeSchedule();
-                    SharedPreferences prefs = getActivity().getSharedPreferences("snooze", Context.MODE_PRIVATE);
 
-                    if(LinphoneService.instance().shouldAcceptCalls()&&!prefs.getBoolean("inSnooze", false)){
+                    if(LinphoneService.instance().shouldAcceptCalls()){
                         LinphoneActivity.instance().showSnoozeIndicator(false);
                     }
-                    else if(!LinphoneService.instance().shouldAcceptCalls()||prefs.getBoolean("inSnooze", false)){
+                    else if(!LinphoneService.instance().shouldAcceptCalls()){
                         LinphoneActivity.instance().showSnoozeIndicator(true);
                     }
 

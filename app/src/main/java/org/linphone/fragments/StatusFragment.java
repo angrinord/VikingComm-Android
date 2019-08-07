@@ -22,7 +22,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -80,9 +79,8 @@ public class StatusFragment extends Fragment {
         mVoicemail = view.findViewById(R.id.voicemail);
         mVoicemailCount = view.findViewById(R.id.voicemail_count);
         mSnoozeIndicator = view.findViewById(R.id.snooze_indicator);
-        SharedPreferences prefs = getActivity().getSharedPreferences("snooze",Context.MODE_PRIVATE);
         boolean shouldAcceptCalls = LinphoneService.instance().shouldAcceptCalls();
-        if(prefs.getBoolean("inSnooze", false)||!shouldAcceptCalls){
+        if(!shouldAcceptCalls){
             mSnoozeIndicator.setVisibility(View.VISIBLE);
         }
         else{
