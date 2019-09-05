@@ -69,6 +69,7 @@ import org.linphone.R;
 import org.linphone.compatibility.Compatibility;
 import org.linphone.contacts.ContactsManager;
 import org.linphone.contacts.LinphoneContact;
+import org.linphone.core.MediaDirection;
 import org.linphone.fragments.StatusFragment;
 import org.linphone.receivers.BluetoothManager;
 import org.linphone.settings.LinphonePreferences;
@@ -496,24 +497,24 @@ public class CallActivity extends LinphoneGenericActivity
         }
 
         switch (requestCode) {
-            case PERMISSIONS_REQUEST_CAMERA:
-                LinphoneUtils.dispatchOnUIThread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                acceptCallUpdate(grantResults[0] == PackageManager.PERMISSION_GRANTED);
-                            }
-                        });
-                break;
-            case PERMISSIONS_ENABLED_CAMERA:
-                LinphoneUtils.dispatchOnUIThread(
-                        new Runnable() {
-                            @Override
-                            public void run() {
-                                disableVideo(grantResults[0] != PackageManager.PERMISSION_GRANTED);
-                            }
-                        });
-                break;
+//            case PERMISSIONS_REQUEST_CAMERA:
+//                LinphoneUtils.dispatchOnUIThread(
+//                        new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                acceptCallUpdate(grantResults[0] == PackageManager.PERMISSION_GRANTED);
+//                            }
+//                        });
+//                break;
+//            case PERMISSIONS_ENABLED_CAMERA:
+//                LinphoneUtils.dispatchOnUIThread(
+//                        new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                disableVideo(grantResults[0] != PackageManager.PERMISSION_GRANTED);
+//                            }
+//                        });
+//                break;
             case PERMISSIONS_ENABLED_MIC:
                 LinphoneUtils.dispatchOnUIThread(
                         new Runnable() {
@@ -1125,8 +1126,8 @@ public class CallActivity extends LinphoneGenericActivity
         CallParams params = LinphoneManager.getLc().createCallParams(call);
         if (accept) {
             params.enableVideo(true);
-            //params.setVideoDirection(MediaDirection.RecvOnly);
-            LinphoneManager.getLc().enableVideoCapture(true);
+            params.setVideoDirection(MediaDirection.RecvOnly);
+            LinphoneManager.getLc().enableVideoCapture(false);
             LinphoneManager.getLc().enableVideoDisplay(true);
         }
 

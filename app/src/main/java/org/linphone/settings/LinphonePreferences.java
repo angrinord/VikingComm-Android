@@ -302,7 +302,7 @@ public class LinphonePreferences {
 
     public void enableVideo(boolean enable) {
         if (getLc() == null) return;
-        //getLc().enableVideoCapture(enable);
+        getLc().enableVideoCapture(false);
         getLc().enableVideoDisplay(enable);
     }
 

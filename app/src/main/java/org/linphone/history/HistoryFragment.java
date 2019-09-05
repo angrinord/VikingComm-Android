@@ -43,7 +43,6 @@ import org.linphone.fragments.FragmentsAvailable;
 import org.linphone.LinphoneActivity;
 import org.linphone.LinphoneManager;
 import org.linphone.R;
-import org.linphone.core.Address;
 import org.linphone.core.Call;
 import org.linphone.core.CallLog;
 import org.linphone.utils.SelectableHelper;
@@ -159,9 +158,7 @@ public class HistoryFragment extends Fragment implements OnClickListener, OnItem
 
         mLogs = Arrays.asList(LinphoneManager.getLc().getCallLogs());
         hideHistoryListAndDisplayMessageIfEmpty();
-        mHistoryAdapter =
-                new HistoryAdapter(
-                        getActivity().getApplicationContext(), mLogs, this, mSelectionHelper);
+        mHistoryAdapter = new HistoryAdapter(getActivity().getApplicationContext(), mLogs, this, mSelectionHelper);
         mHistoryList.setAdapter(mHistoryAdapter);
         mSelectionHelper.setAdapter(mHistoryAdapter);
         mSelectionHelper.setDialogMessage(R.string.call_log_delete_dialog);
@@ -234,18 +231,18 @@ public class HistoryFragment extends Fragment implements OnClickListener, OnItem
         if (mHistoryAdapter.isEditable()) {
             mHistoryAdapter.toggleSelection(position);
         } else {
-            if (LinphoneActivity.isInstantiated()) {
-                CallLog log = mLogs.get(position);
-                Address address;
-                if (log.getDir() == Call.Dir.Incoming) {
-                    address = log.getFromAddress();
-                } else {
-                    address = log.getToAddress();
-                }
-                LinphoneActivity.instance()
-                        .setAddresGoToDialerAndCall(
-                                address.asStringUriOnly(), address.getDisplayName());
-            }
+//            if (LinphoneActivity.isInstantiated()) {
+//                CallLog log = mLogs.get(position);
+//                Address address;
+//                if (log.getDir() == Call.Dir.Incoming) {
+//                    address = log.getFromAddress();
+//                } else {
+//                    address = log.getToAddress();
+//                }
+//                LinphoneActivity.instance()
+//                        .setAddresGoToDialerAndCall(
+//                                address.asStringUriOnly(), address.getDisplayName());
+//            }
         }
     }
 

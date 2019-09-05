@@ -173,9 +173,7 @@ public class DialerFragment extends Fragment {
         String addressWaitingToBeCalled = LinphoneActivity.instance().addressWaitingToBeCalled;
         if (addressWaitingToBeCalled != null) {
             mAddress.setText(addressWaitingToBeCalled);
-            if (!LinphoneActivity.instance().isCallTransfer()
-                    && getResources()
-                            .getBoolean(R.bool.automatically_start_intercepted_outgoing_gsm_call)) {
+            if (!LinphoneActivity.instance().isCallTransfer() && getResources().getBoolean(R.bool.automatically_start_intercepted_outgoing_gsm_call)) {
                 newOutgoingCall(addressWaitingToBeCalled);
             }
             LinphoneActivity.instance().addressWaitingToBeCalled = null;

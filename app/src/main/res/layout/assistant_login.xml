@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="85dp"
+                android:layout_marginStart="50dp"
                 android:gravity="center"
                 android:text="@string/assistant_generic_account"
                 android:textAllCaps="true"
@@ -64,9 +64,9 @@
                 android:layout_height="40dp"
                 android:background="@drawable/resizable_textfield"
                 android:contentDescription="@string/content_description_username_field"
+                android:hint="@string/username"
                 android:inputType="text|textNoSuggestions"
                 android:maxLines="1"
-                android:hint="@string/username"
                 android:textColor="@color/black_color" />
 
             <TextView
@@ -83,9 +83,9 @@
                 android:layout_height="40dp"
                 android:background="@drawable/resizable_textfield"
                 android:contentDescription="@string/content_description_username_field"
+                android:hint="@string/userid"
                 android:inputType="text|textNoSuggestions"
                 android:maxLines="1"
-                android:hint="@string/userid"
                 android:textColor="@color/black_color" />
 
             <TextView
@@ -101,9 +101,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@drawable/resizable_textfield"
+                android:hint="@string/password"
                 android:inputType="textPassword"
                 android:maxLines="1"
-                android:hint="@string/password"
                 android:textColor="@color/black_color" />
 
             <TextView
@@ -120,9 +120,9 @@
                 android:layout_height="40dp"
                 android:background="@drawable/resizable_textfield"
                 android:contentDescription="@string/content_description_domain_field"
+                android:hint="@string/domain"
                 android:inputType="textUri"
                 android:maxLines="1"
-                android:hint="@string/domain"
                 android:textColor="@color/black_color" />
 
             <TextView
@@ -139,9 +139,9 @@
                 android:layout_height="40dp"
                 android:background="@drawable/resizable_textfield"
                 android:contentDescription="@string/content_description_display_field"
+                android:hint="@string/assistant_display_name_optional"
                 android:inputType="textPersonName"
                 android:maxLines="1"
-                android:hint="@string/assistant_display_name_optional"
                 android:textColor="@color/black_color" />
 
             <TextView
@@ -164,25 +164,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:textColor="?attr/primaryTextColor"
                     android:checked="true"
-                    android:text="@string/pref_transport_udp" />
+                    android:text="@string/pref_transport_udp"
+                    android:textColor="?attr/primaryTextColor" />
 
                 <RadioButton
                     android:id="@+id/transport_tcp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:textColor="?attr/primaryTextColor"
-                    android:text="@string/pref_transport_tcp" />
+                    android:text="@string/pref_transport_tcp"
+                    android:textColor="?attr/primaryTextColor" />
 
                 <RadioButton
                     android:id="@+id/transport_tls"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:textColor="?attr/primaryTextColor"
-                    android:text="@string/pref_transport_tls" />
+                    android:text="@string/pref_transport_tls"
+                    android:textColor="?attr/primaryTextColor" />
 
             </RadioGroup>
 

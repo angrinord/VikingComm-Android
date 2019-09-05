@@ -139,13 +139,9 @@ public class HistoryDetailFragment extends Fragment implements OnClickListener {
         mChatSecured.setVisibility(View.GONE);
 
         if (lAddress != null) {
-            CallLog[] logs =
-                    LinphoneManager.getLcIfManagerNotDestroyedOrNull()
-                            .getCallHistoryForAddress(lAddress);
+            CallLog[] logs = LinphoneManager.getLcIfManagerNotDestroyedOrNull().getCallHistoryForAddress(lAddress);
             List<CallLog> logsList = Arrays.asList(logs);
-            mLogsList.setAdapter(
-                    new HistoryLogAdapter(
-                            LinphoneActivity.instance(), R.layout.history_detail_cell, logsList));
+            mLogsList.setAdapter(new HistoryLogAdapter(LinphoneActivity.instance(), R.layout.history_detail_cell, logsList));
 
             mContactAddress.setText(LinphoneUtils.getDisplayableAddress(lAddress));
             mContact = ContactsManager.getInstance().findContactFromAddress(lAddress);
@@ -193,9 +189,11 @@ public class HistoryDetailFragment extends Fragment implements OnClickListener {
             displayName = LinphoneUtils.getUsernameFromAddress(sipUri);
         }
 
-        mSipUri = sipUri;
-        mDisplayName = displayName;
-        displayHistory();
+        if(mSipUri!=sipUri){
+            mSipUri = sipUri;
+            mDisplayName = displayName;
+            displayHistory();
+        }
     }
 
     @Override

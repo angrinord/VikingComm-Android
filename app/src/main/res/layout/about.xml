@@ -19,7 +19,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@color/button_color"
+                android:background="@color/light_grey_color"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="20dp">
@@ -41,24 +41,22 @@
 
                 <TextView
                     android:id="@+id/about_android_version"
-                    style="@style/about_version_font"
+                    style="@android:style/Widget.Holo.Light.TextView.SpinnerItem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
                     android:paddingTop="20dp"
-                    android:text="@string/about_version"
-                    android:textColorLink="?attr/secondaryTextColor" />
+                    android:text="@string/about_version" />
 
                 <TextView
                     android:id="@+id/about_liblinphone_sdk_version"
-                    style="@style/about_version_font"
+                    style="@android:style/Widget.Holo.Light.TextView.SpinnerItem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/about_liblinphone_sdk_version"
-                    android:textColorLink="?attr/secondaryTextColor" />
+                    android:text="@string/about_liblinphone_sdk_version" />
 
             </LinearLayout>
 

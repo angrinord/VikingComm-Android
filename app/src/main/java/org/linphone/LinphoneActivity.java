@@ -169,6 +169,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
     private boolean mCallTransfer = false;
     private boolean mIsOnBackground = false;
     private int mAlwaysChangingPhoneAngle = -1;
+    private String hDetailUri = "";
 
     public static boolean isInstantiated() {
         return sInstance != null;
@@ -769,6 +770,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
         mFragment = null;
         switch (newFragmentType) {
             case HISTORY_LIST:
+                hDetailUri = "";
                 mFragment = new HistoryFragment();
                 break;
             case HISTORY_DETAIL:
@@ -848,7 +850,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
                 changeFragmentForTablets(mFragment, newFragmentType);
                 switch (newFragmentType) {
                     case HISTORY_LIST:
-                        ((HistoryFragment) mFragment).displayFirstLog();
+                        //((HistoryFragment) mFragment).displayFirstLog();
                         break;
                     case CONTACTS_LIST:
                         ((ContactsFragment) mFragment).displayFirstContact();
@@ -967,34 +969,36 @@ public class LinphoneActivity extends LinphoneGenericActivity
     }
 
     public void displayHistoryDetail(String sipUri, CallLog log) {
-        Address lAddress;
-        LinphoneContact c = null;
+        if(!sipUri.equals(hDetailUri)){
+            hDetailUri=sipUri;
 
-        lAddress = Factory.instance().createAddress(sipUri);
-        if (lAddress != null) {
-            c = ContactsManager.getInstance().findContactFromAddress(lAddress);
-        }
+            Address lAddress;
+            LinphoneContact c = null;
 
-        String displayName =
-                c != null ? c.getFullName() : LinphoneUtils.getAddressDisplayName(sipUri);
-        String pictureUri =
-                c != null && c.getPhotoUri() != null ? c.getPhotoUri().toString() : null;
-
-        Fragment fragment2 = getFragmentManager().findFragmentById(R.id.fragmentContainer2);
-        if (fragment2 != null
-                && fragment2.isVisible()
-                && mCurrentFragment == FragmentsAvailable.HISTORY_DETAIL) {
-            HistoryDetailFragment historyDetailFragment = (HistoryDetailFragment) fragment2;
-            historyDetailFragment.changeDisplayedHistory(sipUri, displayName);
-        } else {
-            Bundle extras = new Bundle();
-            extras.putString("SipUri", sipUri);
-            if (displayName != null) {
-                extras.putString("DisplayName", displayName);
-                extras.putString("PictureUri", pictureUri);
+            lAddress = Factory.instance().createAddress(sipUri);
+            if (lAddress != null) {
+                c = ContactsManager.getInstance().findContactFromAddress(lAddress);
             }
 
-            changeCurrentFragment(FragmentsAvailable.HISTORY_DETAIL, extras);
+            String displayName = c != null ? c.getFullName() : LinphoneUtils.getAddressDisplayName(sipUri);
+            String pictureUri = c != null && c.getPhotoUri() != null ? c.getPhotoUri().toString() : null;
+
+            Fragment fragment2 = getFragmentManager().findFragmentById(R.id.fragmentContainer2);
+            if (fragment2 != null
+                && fragment2.isVisible()
+                && mCurrentFragment == FragmentsAvailable.HISTORY_DETAIL) {
+                HistoryDetailFragment historyDetailFragment = (HistoryDetailFragment) fragment2;
+                historyDetailFragment.changeDisplayedHistory(sipUri, displayName);
+            } else {
+                Bundle extras = new Bundle();
+                extras.putString("SipUri", sipUri);
+                if (displayName != null) {
+                    extras.putString("DisplayName", displayName);
+                    extras.putString("PictureUri", pictureUri);
+                }
+
+                changeCurrentFragment(FragmentsAvailable.HISTORY_DETAIL, extras);
+            }
         }
     }
 
@@ -1412,6 +1416,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
     public void setAddresGoToDialerAndCall(String number, String name) {
         AddressType address = new AddressText(this, null);
         address.setText(number);
+        //address.setDisplayedName(LinphoneUtils.getUsernameFromAddress(number));
         address.setDisplayedName(name);
         LinphoneManager.getInstance().newOutgoingCall(address);
     }

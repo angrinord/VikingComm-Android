@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 import org.linphone.core.CallParams;
+import org.linphone.core.MediaDirection;
 
 public class BandwidthManager {
 
@@ -52,6 +53,7 @@ public class BandwidthManager {
             }
             else {
                 callParams.enableVideo(true);
+                callParams.setVideoDirection(MediaDirection.RecvOnly);
                 callParams.setAudioBandwidthLimit(0); // disable limitation
             }
         }

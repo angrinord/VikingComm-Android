@@ -72,6 +72,7 @@ import java.util.TimerTask;
 import org.linphone.assistant.AssistantActivity;
 import org.linphone.contacts.ContactsManager;
 import org.linphone.contacts.LinphoneContact;
+import org.linphone.core.MediaDirection;
 import org.linphone.receivers.BluetoothManager;
 import org.linphone.receivers.HookReceiver;
 import org.linphone.receivers.OutgoingCallReceiver;
@@ -125,7 +126,6 @@ import org.linphone.core.tools.H264Helper;
 import org.linphone.core.tools.Log;
 import org.linphone.core.tools.OpenH264DownloadHelper;
 import org.linphone.core.tools.OpenH264DownloadHelperListener;
-import org.linphone.mediastream.Version;
 import org.linphone.mediastream.video.capture.hwconf.AndroidCameraConfiguration;
 import org.linphone.mediastream.video.capture.hwconf.AndroidCameraConfiguration.AndroidCamera;
 import org.linphone.mediastream.video.capture.hwconf.Hacks;
@@ -501,17 +501,13 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
         boolean isLowBandwidthConnection = !LinphoneUtils.isHighBandwidthConnection(LinphoneService.instance().getApplicationContext());
 
         if (mCore.isNetworkReachable()) {
-            if (Version.isVideoCapable()) {
+//            if (Version.isVideoCapable()) {
                 boolean prefVideoEnable = mPrefs.isVideoEnabled();
                 boolean prefInitiateWithVideo = mPrefs.shouldInitiateVideoCall();
-                CallManager.getInstance()
-                        .inviteAddress(
-                                to,
-                                prefVideoEnable && prefInitiateWithVideo,
-                                isLowBandwidthConnection);
-            } else {
-                CallManager.getInstance().inviteAddress(to, false, isLowBandwidthConnection);
-            }
+                CallManager.getInstance().inviteAddress(to, prefVideoEnable && prefInitiateWithVideo, isLowBandwidthConnection);
+//            } else {
+//                CallManager.getInstance().inviteAddress(to, false, isLowBandwidthConnection);
+//            }
         } else if (LinphoneActivity.isInstantiated()) {
             LinphoneActivity.instance()
                     .displayCustomToast(
@@ -1431,6 +1427,7 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
         if (call == null) return false;
 
         CallParams params = LinphoneManager.getLc().createCallParams(call);
+        params.setVideoDirection(MediaDirection.RecvOnly);
 
         boolean isLowBandwidthConnection =
                 !LinphoneUtils.isHighBandwidthConnection(
