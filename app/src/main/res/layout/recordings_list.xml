@@ -9,17 +9,17 @@
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="?attr/lighToolbarBackgroundColor"
+        android:background="@color/toolbar_color"
         android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/back"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight=".16"
             android:background="?attr/button_background_drawable"
             android:contentDescription="@string/content_description_back"
-            android:padding="18dp"
+            android:padding="15dp"
             android:src="@drawable/back" />
 
         <TextView
@@ -31,17 +31,16 @@
             android:gravity="center"
             android:maxLines="1"
             android:padding="15dp"
-            android:text="@string/menu_recordings"/>
+            android:text="@string/menu_recordings" />
 
         <ImageView
             android:id="@+id/edit"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
             android:background="?attr/button_background_drawable"
             android:contentDescription="@string/content_description_edit_list"
             android:padding="15dp"
-            android:src="@drawable/delete" />
+            android:src="@drawable/delete_selector" />
     </LinearLayout>
 
     <include layout="@layout/edit_list" />

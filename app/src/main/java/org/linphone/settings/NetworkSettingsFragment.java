@@ -76,7 +76,7 @@ public class NetworkSettingsFragment extends Fragment {
     protected void loadSettings() {
         mWifiOnly = mRootView.findViewById(R.id.pref_wifi_only);
 
-        mIpv6 = mRootView.findViewById(R.id.pref_ipv6);
+//        mIpv6 = mRootView.findViewById(R.id.pref_ipv6);
 
         mPush = mRootView.findViewById(R.id.pref_push_notification);
 
@@ -111,13 +111,13 @@ public class NetworkSettingsFragment extends Fragment {
                     }
                 });
 
-        mIpv6.setListener(
-                new SettingListenerBase() {
-                    @Override
-                    public void onBoolValueChanged(boolean newValue) {
-                        mPrefs.useIpv6(newValue);
-                    }
-                });
+//        mIpv6.setListener(
+//                new SettingListenerBase() {
+//                    @Override
+//                    public void onBoolValueChanged(boolean newValue) {
+//                        mPrefs.useIpv6(newValue);
+//                    }
+//                });
 
         mPush.setListener(
                 new SettingListenerBase() {
@@ -219,7 +219,7 @@ public class NetworkSettingsFragment extends Fragment {
     protected void updateValues() {
         mWifiOnly.setChecked(mPrefs.isWifiOnlyEnabled());
 
-        mIpv6.setChecked(mPrefs.isUsingIpv6());
+//        mIpv6.setChecked(mPrefs.isUsingIpv6());
 
         mPush.setChecked(mPrefs.isPushNotificationEnabled());
         mPush.setVisibility(

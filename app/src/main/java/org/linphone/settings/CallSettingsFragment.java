@@ -251,8 +251,7 @@ public class CallSettingsFragment extends Fragment {
         values.add(String.valueOf(MediaEncryption.None.toInt()));
 
         Core core = LinphoneManager.getLcIfManagerNotDestroyedOrNull();
-        if (core != null
-                && !getResources().getBoolean(R.bool.disable_all_security_features_for_markets)) {
+        if (core != null && !getResources().getBoolean(R.bool.disable_all_security_features_for_markets)) {
             boolean hasZrtp = core.mediaEncryptionSupported(MediaEncryption.ZRTP);
             boolean hasSrtp = core.mediaEncryptionSupported(MediaEncryption.SRTP);
             boolean hasDtls = core.mediaEncryptionSupported(MediaEncryption.DTLS);
@@ -264,14 +263,14 @@ public class CallSettingsFragment extends Fragment {
                     entries.add("SRTP");
                     values.add(String.valueOf(MediaEncryption.SRTP.toInt()));
                 }
-                if (hasZrtp) {
-                    entries.add("ZRTP");
-                    values.add(String.valueOf(MediaEncryption.ZRTP.toInt()));
-                }
-                if (hasDtls) {
-                    entries.add("DTLS");
-                    values.add(String.valueOf(MediaEncryption.DTLS.toInt()));
-                }
+//                if (hasZrtp) {
+//                    entries.add("ZRTP");
+//                    values.add(String.valueOf(MediaEncryption.ZRTP.toInt()));
+//                }
+//                if (hasDtls) {
+//                    entries.add("DTLS");
+//                    values.add(String.valueOf(MediaEncryption.DTLS.toInt()));
+//                }
             }
         }
 

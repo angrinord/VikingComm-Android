@@ -21,17 +21,21 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SeekBar;
 import androidx.annotation.NonNull;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
 import org.linphone.R;
 import org.linphone.utils.SelectableAdapter;
 import org.linphone.utils.SelectableHelper;
@@ -104,13 +108,18 @@ public class RecordingsAdapter extends SelectableAdapter<RecordingViewHolder> {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (record.isPaused()) {
-                            record.play();
-                            viewHolder.playButton.setImageResource(R.drawable.record_pause);
-                        } else {
-                            record.pause();
-                            viewHolder.playButton.setImageResource(R.drawable.record_play);
-                        }
+//                        if (record.isPaused()) {
+//                            record.play();
+//                            viewHolder.playButton.setImageResource(R.drawable.record_pause);
+//                        } else {
+//                            record.pause();
+//                            viewHolder.playButton.setImageResource(R.drawable.record_play);
+//                        }
+
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
+                        intent.setDataAndType(Uri.parse(record.getRecordPath()).buildUpon().path(record.getRecordPath()).build(), "video/*");
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mContext.startActivity(intent);
                     }
                 });
 

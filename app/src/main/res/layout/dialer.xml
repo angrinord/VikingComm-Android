@@ -42,7 +42,7 @@
             android:backgroundTint="@color/transparent_color"
             android:ellipsize="start"
             android:hint="@string/address_bar_hint"
-            android:inputType="textEmailAddress"
+            android:inputType="textVisiblePassword"
             android:paddingLeft="20dp"
             android:paddingRight="5dp"
             android:textColorHint="@color/light_grey_color" />
@@ -74,12 +74,11 @@
             <ImageView
                 android:id="@+id/add_contact"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:background="?attr/button_background_drawable"
                 android:contentDescription="@string/content_description_add_contact"
-                android:padding="15dp"
-                android:src="@drawable/contact_add" />
+                android:src="@drawable/add_selector" />
 
         </RelativeLayout>
 

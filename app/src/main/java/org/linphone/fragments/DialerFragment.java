@@ -31,6 +31,7 @@ import android.widget.LinearLayout;
 import org.linphone.LinphoneActivity;
 import org.linphone.LinphoneManager;
 import org.linphone.R;
+import org.linphone.core.Address;
 import org.linphone.core.Core;
 import org.linphone.views.AddressAware;
 import org.linphone.views.AddressText;
@@ -99,8 +100,17 @@ public class DialerFragment extends Fragment {
                 new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        LinphoneActivity.instance()
-                                .displayContactsForEditing(mAddress.getText().toString());
+                        String text = mAddress.getText().toString();
+                        if(text.contains("@")){
+                            String[] address = text.split("@");
+                            LinphoneActivity.instance().addContact(address[0],text);
+                        }
+                        else{
+                            Address idAddress = LinphoneManager.getLc().getDefaultProxyConfig().getIdentityAddress();
+                            int port = idAddress.getPort();
+                            String domain = idAddress.getDomain();
+                            LinphoneActivity.instance().addContact(text, text+'@'+domain+':'+port);
+                        }
                     }
                 };
         mCancelListener =
@@ -209,17 +219,14 @@ public class DialerFragment extends Fragment {
                 mCall.setImageResource(R.drawable.call_audio_start);
             }
             mAddContact.setEnabled(false);
-            mAddContact.setImageResource(R.drawable.contact_add);
+            mAddContact.setImageResource(R.drawable.add_selector);
             mAddContact.setOnClickListener(mAddContactListener);
             enableDisableAddContact();
         }
     }
 
     public void enableDisableAddContact() {
-        mAddContact.setEnabled(
-                LinphoneManager.getLcIfManagerNotDestroyedOrNull() != null
-                                && LinphoneManager.getLc().getCallsNb() > 0
-                        || !mAddress.getText().toString().equals(""));
+        mAddContact.setEnabled(LinphoneManager.getLcIfManagerNotDestroyedOrNull() != null && LinphoneManager.getLc().getCallsNb() > 0 || !mAddress.getText().toString().equals(""));
     }
 
     public void displayTextInAddressBar(String numberOrSipAddress) {

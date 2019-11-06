@@ -54,13 +54,12 @@
 
             <ImageView
                 android:id="@+id/edit"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2"
                 android:background="?attr/button_background_drawable"
                 android:contentDescription="@string/content_description_edit_list"
                 android:padding="15dp"
-                android:src="@drawable/delete" />
+                android:src="@drawable/delete_selector" />
         </LinearLayout>
 
         <include layout="@layout/edit_list" />

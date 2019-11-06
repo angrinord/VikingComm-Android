@@ -51,6 +51,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -58,6 +59,7 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.linphone.LinphoneLauncherActivity;
+import org.linphone.core.NatPolicy;
 import org.linphone.fragments.StatusFragment;
 import org.linphone.utils.ThemableActivity;
 import org.linphone.LinphoneActivity;
@@ -492,12 +494,10 @@ public class AssistantActivity extends ThemableActivity
     }
 
     public void linphoneLogIn(AccountCreator accountCreator) {
-        LinphoneManager.getLc()
-                .loadConfigFromXml(LinphoneManager.getInstance().getLinphoneDynamicConfigFile());
+        LinphoneManager.getLc().loadConfigFromXml(LinphoneManager.getInstance().getLinphoneDynamicConfigFile());
         configureProxyConfig(accountCreator);
         // Restore default values for proxy config
-        LinphoneManager.getLc()
-                .loadConfigFromXml(LinphoneManager.getInstance().getDefaultDynamicConfigFile());
+        LinphoneManager.getLc().loadConfigFromXml(LinphoneManager.getInstance().getDefaultDynamicConfigFile());
     }
 
     public void genericLogIn(
@@ -528,6 +528,14 @@ public class AssistantActivity extends ThemableActivity
 
         proxyConfig.setDialPrefix(prefix);
 
+        NatPolicy natPolicy = proxyConfig.getNatPolicy();
+        if(natPolicy==null){
+            natPolicy = core.createNatPolicy();
+            natPolicy.setStunServer(LinphoneManager.getInstance().getContext().getString(R.string.default_stun));
+            natPolicy.enableStun(true);
+            natPolicy.enableIce(true);
+            core.setNatPolicy(natPolicy);
+        }
         core.addProxyConfig(proxyConfig);
         core.setDefaultProxyConfig(proxyConfig);
 
@@ -783,10 +791,16 @@ public class AssistantActivity extends ThemableActivity
 
     private void goToLinphoneActivity() {
         mPrefs.firstLaunchSuccessful();
-        startActivity(
-                new Intent()
-                        .setClass(this, LinphoneActivity.class)
-                        .putExtra("isNewProxyConfig", true));
+        String localUser = LinphoneManager.getLc().getDefaultProxyConfig().getIdentityAddress().getUsername();
+        String domain = LinphoneManager.getLc().getDefaultProxyConfig().getIdentityAddress().getDomain();
+        String num = localUser.split("u")[0];
+        Intent intent = new Intent();
+        intent.setClass(this, LinphoneActivity.class);
+        intent.putExtra("isNewProxyConfig", true);
+        if(num.matches("\\d{10}")&&domain.equals(getResources().getString(R.string.default_domain))){
+            intent.putExtra("fromAssistant", true);
+        }
+        startActivity(intent);
         finish();
     }
 

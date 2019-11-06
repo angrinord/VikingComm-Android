@@ -146,11 +146,11 @@ public class LoginFragment extends Fragment implements OnClickListener, TextWatc
                 }
             }
 
-            if (mDomain.getText().toString().compareTo(getString(R.string.default_domain)) == 0) {
-                AssistantActivity.instance()
-                        .displayLoginLinphone(
-                                mLogin.getText().toString(), mPassword.getText().toString());
-            } else {
+//            if (mDomain.getText().toString().compareTo(getString(R.string.default_domain)) == 0) {
+//                AssistantActivity.instance()
+//                        .displayLoginLinphone(
+//                                mLogin.getText().toString(), mPassword.getText().toString());
+//            } else {
                 AssistantActivity.instance()
                         .genericLogIn(
                                 mLogin.getText().toString(),
@@ -160,7 +160,8 @@ public class LoginFragment extends Fragment implements OnClickListener, TextWatc
                                 null,
                                 mDomain.getText().toString(),
                                 transport);
-            }
+            //}
+
         }
         else if(id == R.id.qr_button){
             AssistantActivity.instance().displayQRCodeReader();

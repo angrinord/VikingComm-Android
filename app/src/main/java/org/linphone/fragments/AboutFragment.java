@@ -96,8 +96,7 @@ public class AboutFragment extends Fragment implements OnClickListener {
 
         mSendLogButton = view.findViewById(R.id.send_log);
         mSendLogButton.setOnClickListener(this);
-        mSendLogButton.setVisibility(
-                LinphonePreferences.instance().isDebugEnabled() ? View.VISIBLE : View.GONE);
+        mSendLogButton.setVisibility(LinphonePreferences.instance().isDebugEnabled() ? View.VISIBLE : View.GONE);
 
         mResetLogButton = view.findViewById(R.id.reset_log);
         mResetLogButton.setOnClickListener(this);

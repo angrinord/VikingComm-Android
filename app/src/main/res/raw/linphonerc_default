@@ -6,7 +6,9 @@ keepalive_period=30000
 sip_port=-1
 sip_tcp_port=-1
 sip_tls_port=-1
-media_encryption=none
+srtp_crypto_suites=MS_AES_128_SHA1_80,MS_AES_128_SHA1_32
+verify_server_certs=1
+verify_server_cn=1
 
 [video]
 size=vga
@@ -27,6 +29,5 @@ version_check_url_root=https://www.linphone.org/releases
 max_calls=10
 history_max_size=100
 
-[in-app-purchase]
-server_url=https://subscribe.linphone.org:444/inapp.php
-purchasable_items_ids=test_account_subscription
+[net]
+stun_server=stun.l.google.com:19302

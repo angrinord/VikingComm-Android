@@ -11,17 +11,17 @@
         android:layout_height="match_parent"
         android:visibility="visible" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
-        <TextureView
-            android:id="@+id/videoCaptureSurface"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true" />
+        <!--<TextureView-->
+            <!--android:id="@+id/videoCaptureSurface"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentBottom="true" />-->
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 </FrameLayout>

@@ -69,7 +69,7 @@ public class ContactEditorFragment extends Fragment {
     private ImageView mCancel, mDeleteContact, mOk;
     private ImageView mAddNumber, mAddSipAddress, mContactPicture;
     private LinearLayout mPhoneNumbersSection, mSipAddressesSection;
-    private EditText mFirstName, mLastName, mOrganization;
+    private EditText mLastName, mOrganization;
     private LayoutInflater mInflater;
     private boolean mIsNewContact;
     private LinphoneContact mContact;
@@ -154,7 +154,7 @@ public class ContactEditorFragment extends Fragment {
                         }
 
                         mContact.setFirstNameAndLastName(
-                                mFirstName.getText().toString(),
+                                "",
                                 mLastName.getText().toString(),
                                 true);
 
@@ -226,9 +226,7 @@ public class ContactEditorFragment extends Fragment {
                 new TextWatcher() {
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        mOk.setEnabled(
-                                mLastName.getText().length() > 0
-                                        || mFirstName.getText().length() > 0);
+                        mOk.setEnabled(mLastName.getText().length() > 0);
                     }
 
                     @Override
@@ -239,23 +237,23 @@ public class ContactEditorFragment extends Fragment {
                     public void afterTextChanged(Editable s) {}
                 });
 
-        mFirstName = mView.findViewById(R.id.contactFirstName);
-        mFirstName.addTextChangedListener(
-                new TextWatcher() {
-                    @Override
-                    public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        mOk.setEnabled(
-                                mFirstName.getText().length() > 0
-                                        || mLastName.getText().length() > 0);
-                    }
-
-                    @Override
-                    public void beforeTextChanged(
-                            CharSequence s, int start, int count, int after) {}
-
-                    @Override
-                    public void afterTextChanged(Editable s) {}
-                });
+//        mFirstName = mView.findViewById(R.id.contactFirstName);
+//        mFirstName.addTextChangedListener(
+//                new TextWatcher() {
+//                    @Override
+//                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                        mOk.setEnabled(
+//                                mFirstName.getText().length() > 0
+//                                        || mLastName.getText().length() > 0);
+//                    }
+//
+//                    @Override
+//                    public void beforeTextChanged(
+//                            CharSequence s, int start, int count, int after) {}
+//
+//                    @Override
+//                    public void afterTextChanged(Editable s) {}
+//                });
 
         mOrganization = mView.findViewById(R.id.contactOrganization);
         boolean isOrgVisible = getResources().getBoolean(R.bool.display_contact_organization);
@@ -272,11 +270,11 @@ public class ContactEditorFragment extends Fragment {
             String fn = mContact.getFirstName();
             String ln = mContact.getLastName();
             if (fn != null || ln != null) {
-                mFirstName.setText(fn);
+//                mFirstName.setText(fn);
                 mLastName.setText(ln);
             } else {
                 mLastName.setText(mContact.getFullName());
-                mFirstName.setText("");
+//                mFirstName.setText("");
             }
 
             mDeleteContact.setOnClickListener(

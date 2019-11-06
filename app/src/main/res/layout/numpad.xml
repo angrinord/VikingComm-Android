@@ -86,25 +86,12 @@
         android:gravity="center">
 
         <org.linphone.views.Digit
-            android:id="@+id/DigitStar"
-            style="@style/DialerDigit"
-            android:background="@drawable/numpad_star_digit"
-            android:soundEffectsEnabled="true"
-            android:text="*" />
-
-        <org.linphone.views.Digit
             android:id="@+id/Digit00"
             style="@style/DialerDigit"
             android:background="@drawable/numpad_zero"
             android:soundEffectsEnabled="true"
             android:text="0+" />
 
-        <org.linphone.views.Digit
-            android:id="@+id/DigitHash"
-            style="@style/DialerDigit"
-            android:background="@drawable/numpad_sharp"
-            android:soundEffectsEnabled="true"
-            android:text="#" />
     </TableRow>
 
 </TableLayout>

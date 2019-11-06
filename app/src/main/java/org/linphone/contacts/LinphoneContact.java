@@ -172,14 +172,6 @@ public class LinphoneContact extends AndroidContact
         mOrganization = org;
     }
 
-    /*
-       Picture related
-    */
-
-    public boolean hasPhoto() {
-        return mPhotoUri != null;
-    }
-
     public Uri getPhotoUri() {
         return mPhotoUri;
     }
@@ -486,12 +478,7 @@ public class LinphoneContact extends AndroidContact
     }
 
     public void syncValuesFromAndroidContact(Context context) {
-        Cursor c =
-                context.getContentResolver()
-                        .query(
-                                ContactsContract.Data.CONTENT_URI,
-                                AsyncContactsLoader.PROJECTION,
-                                ContactsContract.Data.IN_VISIBLE_GROUP
+        Cursor c = context.getContentResolver().query(ContactsContract.Data.CONTENT_URI, AsyncContactsLoader.PROJECTION, ContactsContract.Data.IN_VISIBLE_GROUP
                                         + " == 1 AND "
                                         + ContactsContract.Data.CONTACT_ID
                                         + " == "

@@ -98,7 +98,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:contentDescription="@string/content_description_history"
-                        android:padding="15dp"
+                        android:padding="12dp"
                         android:src="@drawable/footer_history" />
 
                     <View
@@ -133,8 +133,8 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:contentDescription="@string/content_description_contacts"
-                        android:padding="15dp"
-                        android:src="@drawable/footer_contacts" />
+                        android:padding="10dp"
+                        android:src="@drawable/x35_icon" />
 
                     <View
                         android:id="@+id/contacts_select"
@@ -157,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:contentDescription="@string/content_description_dialer"
-                        android:padding="15dp"
+                        android:padding="10dp"
                         android:src="@drawable/footer_dialer" />
 
                     <View
@@ -181,7 +181,7 @@
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:contentDescription="@string/content_description_dialer"
-                        android:paddingBottom="2dp"
+                        android:paddingBottom="5dp"
                         android:scaleType="center"
                         app:srcCompat="@drawable/calendar_icon" />
 

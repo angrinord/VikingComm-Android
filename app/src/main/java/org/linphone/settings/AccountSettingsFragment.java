@@ -49,7 +49,6 @@ import org.linphone.core.Address;
 import org.linphone.core.AuthInfo;
 import org.linphone.core.Core;
 import org.linphone.core.Factory;
-import org.linphone.core.NatPolicy;
 import org.linphone.core.ProxyConfig;
 import org.linphone.core.TransportType;
 import org.linphone.core.tools.Log;
@@ -69,14 +68,14 @@ public class AccountSettingsFragment extends Fragment {
             mDomain,
             mDisplayName,
             mProxy,
-            mStun,
+            //mStun,
             mExpire,
-            mPrefix,
+            //mPrefix,
             mAvpfInterval;
     private SwitchSetting mDisable,
             mUseAsDefault,
             mOutboundProxy,
-            mIce,
+            //mIce,
             mAvpf,
             mReplacePlusBy00,
             mPush;
@@ -150,32 +149,31 @@ public class AccountSettingsFragment extends Fragment {
 
     protected void loadSettings() {
         mUsername = mRootView.findViewById(R.id.pref_username);
-        mUsername.setInputType(InputType.TYPE_CLASS_TEXT);
+        mUsername.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
         mUserId = mRootView.findViewById(R.id.pref_auth_userid);
-        mUserId.setInputType(InputType.TYPE_CLASS_TEXT);
+        mUserId.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
         mPassword = mRootView.findViewById(R.id.pref_passwd);
         mPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
 
         mDomain = mRootView.findViewById(R.id.pref_domain);
-        mDomain.setInputType(InputType.TYPE_CLASS_TEXT);
+        mDomain.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
         mDisplayName = mRootView.findViewById(R.id.pref_display_name);
-        mDisplayName.setInputType(
-                InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        mDisplayName.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
 
         mProxy = mRootView.findViewById(R.id.pref_proxy);
         mProxy.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
 
-        mStun = mRootView.findViewById(R.id.pref_stun_server);
-        mStun.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
+//        mStun = mRootView.findViewById(R.id.pref_stun_server);
+//        mStun.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
 
         mExpire = mRootView.findViewById(R.id.pref_expire);
         mExpire.setInputType(InputType.TYPE_CLASS_NUMBER);
 
-        mPrefix = mRootView.findViewById(R.id.pref_prefix);
-        mPrefix.setInputType(InputType.TYPE_CLASS_TEXT);
+//        mPrefix = mRootView.findViewById(R.id.pref_prefix);
+//        mPrefix.setInputType(InputType.TYPE_CLASS_TEXT);
 
         mAvpfInterval = mRootView.findViewById(R.id.pref_avpf_rr_interval);
         mAvpfInterval.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -186,7 +184,7 @@ public class AccountSettingsFragment extends Fragment {
 
         mOutboundProxy = mRootView.findViewById(R.id.pref_enable_outbound_proxy);
 
-        mIce = mRootView.findViewById(R.id.pref_ice_enable);
+        //mIce = mRootView.findViewById(R.id.pref_ice_enable);
 
         mAvpf = mRootView.findViewById(R.id.pref_avpf);
 
@@ -355,35 +353,35 @@ public class AccountSettingsFragment extends Fragment {
                     }
                 });
 
-        mStun.setOnEditorActionListener(
-                new EditText.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (mProxyConfig != null) {
-                            mProxyConfig.edit();
-                            NatPolicy natPolicy = mProxyConfig.getNatPolicy();
-                            if (natPolicy == null) {
-                                Core core = LinphoneManager.getLcIfManagerNotDestroyedOrNull();
-                                if (core != null) {
-                                    natPolicy = core.createNatPolicy();
-                                    mProxyConfig.setNatPolicy(natPolicy);
-                                }
-                            }
-                            if (natPolicy != null) {
-                                natPolicy.setStunServer(mStun.getValue());
-                            }
-                            if (mStun.getValue() == null || mStun.getValue().isEmpty()) {
-                                mIce.setChecked(false);
-                            }
-                            mIce.setEnabled(
-                                    mStun.getValue() != null && !mStun.getValue().isEmpty());
-                            mProxyConfig.done();
-                        } else {
-                            Log.e("[Account Settings] No proxy config !");
-                        }
-                        return false;
-                    }
-                });
+//        mStun.setOnEditorActionListener(
+//                new EditText.OnEditorActionListener() {
+//                    @Override
+//                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                        if (mProxyConfig != null) {
+//                            mProxyConfig.edit();
+//                            NatPolicy natPolicy = mProxyConfig.getNatPolicy();
+//                            if (natPolicy == null) {
+//                                Core core = LinphoneManager.getLcIfManagerNotDestroyedOrNull();
+//                                if (core != null) {
+//                                    natPolicy = core.createNatPolicy();
+//                                    mProxyConfig.setNatPolicy(natPolicy);
+//                                }
+//                            }
+//                            if (natPolicy != null) {
+//                                natPolicy.setStunServer(mStun.getValue());
+//                            }
+//                            if (mStun.getValue() == null || mStun.getValue().isEmpty()) {
+//                                mIce.setChecked(false);
+//                            }
+//                            mIce.setEnabled(
+//                                    mStun.getValue() != null && !mStun.getValue().isEmpty());
+//                            mProxyConfig.done();
+//                        } else {
+//                            Log.e("[Account Settings] No proxy config !");
+//                        }
+//                        return false;
+//                    }
+//                });
 
         mExpire.setOnEditorActionListener(
                 new EditText.OnEditorActionListener() {
@@ -404,20 +402,20 @@ public class AccountSettingsFragment extends Fragment {
                     }
                 });
 
-        mPrefix.setOnEditorActionListener(
-                new EditText.OnEditorActionListener() {
-                    @Override
-                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                        if (mProxyConfig != null) {
-                            mProxyConfig.edit();
-                            mProxyConfig.setDialPrefix(mPrefix.getValue());
-                            mProxyConfig.done();
-                        } else {
-                            Log.e("[Account Settings] No proxy config !");
-                        }
-                        return false;
-                    }
-                });
+//        mPrefix.setOnEditorActionListener(
+//                new EditText.OnEditorActionListener() {
+//                    @Override
+//                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                        if (mProxyConfig != null) {
+//                            mProxyConfig.edit();
+//                            mProxyConfig.setDialPrefix(mPrefix.getValue());
+//                            mProxyConfig.done();
+//                        } else {
+//                            Log.e("[Account Settings] No proxy config !");
+//                        }
+//                        return false;
+//                    }
+//                });
 
         mAvpfInterval.setListener(
                 new SettingListenerBase() {
@@ -486,32 +484,32 @@ public class AccountSettingsFragment extends Fragment {
                     }
                 });
 
-        mIce.setListener(
-                new SettingListenerBase() {
-                    @Override
-                    public void onBoolValueChanged(boolean newValue) {
-                        if (mProxyConfig != null) {
-                            mProxyConfig.edit();
-
-                            NatPolicy natPolicy = mProxyConfig.getNatPolicy();
-                            if (natPolicy == null) {
-                                Core core = LinphoneManager.getLcIfManagerNotDestroyedOrNull();
-                                if (core != null) {
-                                    natPolicy = core.createNatPolicy();
-                                    mProxyConfig.setNatPolicy(natPolicy);
-                                }
-                            }
-
-                            if (natPolicy != null) {
-                                natPolicy.enableIce(newValue);
-                                natPolicy.enableStun(newValue);
-                            }
-                            mProxyConfig.done();
-                        } else {
-                            Log.e("[Account Settings] No proxy config !");
-                        }
-                    }
-                });
+//        mIce.setListener(
+//                new SettingListenerBase() {
+//                    @Override
+//                    public void onBoolValueChanged(boolean newValue) {
+//                        if (mProxyConfig != null) {
+//                            mProxyConfig.edit();
+//
+//                            NatPolicy natPolicy = mProxyConfig.getNatPolicy();
+//                            if (natPolicy == null) {
+//                                Core core = LinphoneManager.getLcIfManagerNotDestroyedOrNull();
+//                                if (core != null) {
+//                                    natPolicy = core.createNatPolicy();
+//                                    mProxyConfig.setNatPolicy(natPolicy);
+//                                }
+//                            }
+//
+//                            if (natPolicy != null) {
+//                                natPolicy.enableIce(newValue);
+//                                natPolicy.enableStun(newValue);
+//                            }
+//                            mProxyConfig.done();
+//                        } else {
+//                            Log.e("[Account Settings] No proxy config !");
+//                        }
+//                    }
+//                });
 
         mAvpf.setListener(
                 new SettingListenerBase() {
@@ -643,11 +641,11 @@ public class AccountSettingsFragment extends Fragment {
         if (mProxyConfig != null) {
             Address identityAddress = mProxyConfig.getIdentityAddress();
             mAuthInfo = mProxyConfig.findAuthInfo();
-            NatPolicy natPolicy = mProxyConfig.getNatPolicy();
-            if (natPolicy == null) {
-                natPolicy = core.createNatPolicy();
-                core.setNatPolicy(natPolicy);
-            }
+//            NatPolicy natPolicy = mProxyConfig.getNatPolicy();
+//            if (natPolicy == null) {
+//                natPolicy = core.createNatPolicy();
+//                core.setNatPolicy(natPolicy);
+//            }
 
             if (mAuthInfo != null) {
                 mUserId.setValue(mAuthInfo.getUserid());
@@ -669,26 +667,27 @@ public class AccountSettingsFragment extends Fragment {
 
             mProxy.setValue(mProxyConfig.getServerAddr());
 
-            mStun.setValue(natPolicy.getStunServer());
+            //mStun.setValue(natPolicy.getStunServer());
 
             mExpire.setValue(mProxyConfig.getExpires());
 
-            mPrefix.setValue(mProxyConfig.getDialPrefix());
+//            mPrefix.setValue(mProxyConfig.getDialPrefix());
 
             mAvpfInterval.setValue(mProxyConfig.getAvpfRrInterval());
             mAvpfInterval.setEnabled(mProxyConfig.avpfEnabled());
 
             mDisable.setChecked(!mProxyConfig.registerEnabled());
 
-            mUseAsDefault.setChecked(
-                    core != null && mProxyConfig.equals(core.getDefaultProxyConfig()));
+            mUseAsDefault.setChecked(core != null && mProxyConfig.equals(core.getDefaultProxyConfig()));
             mUseAsDefault.setEnabled(!mUseAsDefault.isChecked());
 
             mOutboundProxy.setChecked(mProxyConfig.getRoute() != null);
 
-            mIce.setChecked(natPolicy.iceEnabled());
-            mIce.setEnabled(
-                    natPolicy.getStunServer() != null && !natPolicy.getStunServer().isEmpty());
+//            mIce.setChecked(natPolicy.iceEnabled());
+//            boolean stun = natPolicy.stunEnabled();
+//            String server = natPolicy.getStunServer();
+//            boolean ice = natPolicy.iceEnabled();
+//            mIce.setEnabled(natPolicy.getStunServer() != null && !natPolicy.getStunServer().isEmpty());
 
             mAvpf.setChecked(mProxyConfig.avpfEnabled());
 

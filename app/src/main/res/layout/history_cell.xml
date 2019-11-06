@@ -64,22 +64,12 @@
             android:layout_toLeftOf="@id/detail"
             android:gravity="center_vertical">
 
-            <RelativeLayout
-                android:id="@+id/avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center">
-
-                <include layout="@layout/contact_avatar" />
-
-            </RelativeLayout>
-
             <ImageView
                 android:id="@+id/icon"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_toRightOf="@id/avatar"
+                android:layout_marginStart="5dp"
+                android:layout_toEndOf="@id/avatar"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/content_description_call_direction"
                 android:padding="7dp"

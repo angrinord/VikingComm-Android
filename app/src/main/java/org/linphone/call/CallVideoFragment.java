@@ -43,7 +43,10 @@ import org.linphone.core.tools.Log;
 
 public class CallVideoFragment extends Fragment implements OnGestureListener, OnDoubleTapListener, CompatibilityScaleGestureListener {
     private TextureView mVideoView;
-    private TextureView mCaptureView;
+    public TextureView getVideoView(){
+        return mVideoView;
+    }
+//    private TextureView mCaptureView;
     private GestureDetector mGestureDetector;
     private float mZoomFactor = 1.f;
     private float mZoomCenterX, mZoomCenterY;
@@ -66,10 +69,10 @@ public class CallVideoFragment extends Fragment implements OnGestureListener, On
         }
 
         mVideoView = view.findViewById(R.id.videoSurface);
-        mCaptureView = view.findViewById(R.id.videoCaptureSurface);
+//        mCaptureView = view.findViewById(R.id.videoCaptureSurface);
 
         LinphoneManager.getLc().setNativeVideoWindowId(mVideoView);
-        LinphoneManager.getLc().setNativePreviewWindowId(mCaptureView);
+//        LinphoneManager.getLc().setNativePreviewWindowId(mCaptureView);
 
         mVideoView.setOnTouchListener(
                 new OnTouchListener() {
@@ -86,32 +89,32 @@ public class CallVideoFragment extends Fragment implements OnGestureListener, On
                     }
                 });
 
-        mCaptureView.setOnTouchListener(
-                new OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View view, MotionEvent motionEvent) {
-                        switch (motionEvent.getAction()) {
-                            case MotionEvent.ACTION_DOWN:
-                                mPreviewX = (int) motionEvent.getX();
-                                mPreviewY = (int) motionEvent.getY();
-                                break;
-                            case MotionEvent.ACTION_MOVE:
-                                int x = (int) motionEvent.getX();
-                                int y = (int) motionEvent.getY();
-                                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mCaptureView.getLayoutParams();
-                                lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0); // Clears the rule, as there is no removeRule until API
-                                // 17.
-                                lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
-                                int left = lp.leftMargin + (x - mPreviewX);
-                                int top = lp.topMargin + (y - mPreviewY);
-                                lp.leftMargin = left;
-                                lp.topMargin = top;
-                                view.setLayoutParams(lp);
-                                break;
-                        }
-                        return true;
-                    }
-                });
+//        mCaptureView.setOnTouchListener(
+//                new OnTouchListener() {
+//                    @Override
+//                    public boolean onTouch(View view, MotionEvent motionEvent) {
+//                        switch (motionEvent.getAction()) {
+//                            case MotionEvent.ACTION_DOWN:
+//                                mPreviewX = (int) motionEvent.getX();
+//                                mPreviewY = (int) motionEvent.getY();
+//                                break;
+//                            case MotionEvent.ACTION_MOVE:
+//                                int x = (int) motionEvent.getX();
+//                                int y = (int) motionEvent.getY();
+//                                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) mCaptureView.getLayoutParams();
+//                                lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0); // Clears the rule, as there is no removeRule until API
+//                                // 17.
+//                                lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+//                                int left = lp.leftMargin + (x - mPreviewX);
+//                                int top = lp.topMargin + (y - mPreviewY);
+//                                lp.leftMargin = left;
+//                                lp.topMargin = top;
+//                                view.setLayoutParams(lp);
+//                                break;
+//                        }
+//                        return true;
+//                    }
+//                });
         return view;
     }
 
@@ -150,15 +153,15 @@ public class CallVideoFragment extends Fragment implements OnGestureListener, On
             width = width * maxHeight / height;
             height = maxHeight;
 
-            if (mCaptureView == null) {
-                Log.e("[Video Fragment] mCaptureView is null !");
-                return;
-            }
+//            if (mCaptureView == null) {
+//                Log.e("[Video Fragment] mCaptureView is null !");
+//                return;
+//            }
 
             RelativeLayout.LayoutParams newLp = new RelativeLayout.LayoutParams(width, height);
             newLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 1); // Clears the rule, as there is no removeRule until API 17.
             newLp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 1);
-            mCaptureView.setLayoutParams(newLp);
+//            mCaptureView.setLayoutParams(newLp);
             Log.d("[Video Fragment] Video preview size set to " + width + "x" + height);
         }
     }
@@ -295,7 +298,7 @@ public class CallVideoFragment extends Fragment implements OnGestureListener, On
     public void onDestroy() {
         mInCallActivity = null;
 
-        mCaptureView = null;
+//        mCaptureView = null;
         if (mVideoView != null) {
             mVideoView.setOnTouchListener(null);
             mVideoView = null;

@@ -78,6 +78,7 @@ import org.linphone.contacts.ContactEditorFragment;
 import org.linphone.contacts.ContactsFragment;
 import org.linphone.contacts.ContactsManager;
 import org.linphone.contacts.LinphoneContact;
+import org.linphone.contacts.LinphoneNumberOrAddress;
 import org.linphone.fragments.AboutFragment;
 import org.linphone.fragments.DialerFragment;
 import org.linphone.fragments.EmptyFragment;
@@ -238,7 +239,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
 
         mCurrentFragment = FragmentsAvailable.EMPTY;
         if (savedInstanceState == null) {
-            changeCurrentFragment(FragmentsAvailable.DIALER, getIntent().getExtras());
+            changeCurrentFragment(FragmentsAvailable.CONTACTS_LIST, getIntent().getExtras());
         } else {
             mCurrentFragment =
                     (FragmentsAvailable) savedInstanceState.getSerializable("mCurrentFragment");
@@ -514,7 +515,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
         }
 
         if (requestCode == ANDROID_APP_SETTINGS_ACTIVITY) {
-            LinphoneActivity.instance().goToDialerFragment();
+            LinphoneActivity.instance().goToContactsFragment();
         } else if (resultCode == Activity.RESULT_FIRST_USER && requestCode == SETTINGS_ACTIVITY) {
             if (data.getExtras().getBoolean("Exit", false)) {
                 quit();
@@ -579,7 +580,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
                 }
             } else if (extras.getBoolean("StartCall", false)) {
                 addressWaitingToBeCalled = extras.getString("NumberToCall");
-                goToDialerFragment();
+                goToContactsFragment();
             } else if (extras.getBoolean("Transfer", false)) {
                 intent.putExtra("DoNotGoToCallActivity", true);
             } else if (extras.getBoolean("AddCall", false)) {
@@ -617,7 +618,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
                 } else {
                     if (extras.containsKey("SipUriOrNumber")) {
                         addressWaitingToBeCalled = extras.getString("SipUriOrNumber");
-                        goToDialerFragment();
+                        goToContactsFragment();
                     }
                 }
             }
@@ -626,8 +627,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
     }
 
     @Override
-    public void onRequestPermissionsResult(
-            int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
         // If permission was asked we wait here for the results so dialogs won't conflict
         if (getResources().getBoolean(R.bool.check_for_update_when_app_starts)) {
@@ -637,17 +637,11 @@ public class LinphoneActivity extends LinphoneGenericActivity
         if (permissions.length <= 0) return;
 
         int readContactsI = -1;
-        for (int i = 0; i < permissions.length; i++) {
-            Log.i(
-                    "[Permission] "
-                            + permissions[i]
-                            + " is "
-                            + (grantResults[i] == PackageManager.PERMISSION_GRANTED
-                                    ? "granted"
-                                    : "denied"));
-            if (permissions[i].compareTo(Manifest.permission.READ_CONTACTS) == 0
-                    || permissions[i].compareTo(Manifest.permission.WRITE_CONTACTS) == 0)
+        for (int i = 0; i < permissions.length; i++){
+            Log.i("[Permission] " + permissions[i] + " is " + (grantResults[i] == PackageManager.PERMISSION_GRANTED ? "granted" : "denied"));
+            if(permissions[i].compareTo(Manifest.permission.READ_CONTACTS) == 0 || permissions[i].compareTo(Manifest.permission.WRITE_CONTACTS) == 0){
                 readContactsI = i;
+            }
         }
 
         if (readContactsI >= 0
@@ -657,6 +651,17 @@ public class LinphoneActivity extends LinphoneGenericActivity
         switch (requestCode) {
             case PERMISSIONS_REQUEST_SYNC:
                 ContactsManager.getInstance().initializeContactManager(this);
+                if(getIntent().getBooleanExtra("fromAssistant", false)){
+                    String localUser = LinphoneManager.getLc().getDefaultProxyConfig().getIdentityAddress().getUsername();
+                    String domain = LinphoneManager.getLc().getDefaultProxyConfig().getIdentityAddress().getDomain();
+                    String num = localUser.split("u")[0];
+                    String port = Integer.toString(LinphoneManager.getLc().getDefaultProxyConfig().getIdentityAddress().getPort());
+                    LinphoneContact contact = LinphoneContact.createContact();
+                    contact.addOrUpdateNumberOrAddress(new LinphoneNumberOrAddress(num + '@' + domain + ':' + port, true));
+                    contact.setFirstNameAndLastName("", num, true);
+                    contact.save();
+                    ContactsManager.getInstance().fetchContactsAsync();
+                }
                 break;
             case PERMISSIONS_RECORD_AUDIO_ECHO_CANCELLER:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -1198,7 +1203,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
                 popBackStack();
             } else {
                 hideTopBar();
-                displayDialer();
+                goToContactsFragment();
             }
         }
     }
@@ -1312,11 +1317,11 @@ public class LinphoneActivity extends LinphoneGenericActivity
                                 | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
-    private void goToDialerFragment() {
-        Bundle extras = new Bundle();
-        extras.putString("SipUri", "");
-        changeCurrentFragment(FragmentsAvailable.DIALER, extras);
-        mDialerSelected.setVisibility(View.VISIBLE);
+    private void goToContactsFragment() {
+//        Bundle extras = new Bundle();
+//        extras.putString("SipUri", "");
+        changeCurrentFragment(FragmentsAvailable.CONTACTS_LIST, null);
+        mContactsSelected.setVisibility(View.VISIBLE);
     }
 
     public void updateStatusFragment(StatusFragment fragment) {
@@ -1510,8 +1515,8 @@ public class LinphoneActivity extends LinphoneGenericActivity
         checkAndRequestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, 0);
     }
 
-    public void checkAndRequestReadContactsPermission() {
-        checkAndRequestPermission(Manifest.permission.READ_CONTACTS, PERMISSIONS_REQUEST_SYNC);
+    public void checkAndRequestContactsPermission() {
+        ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_CONTACTS,Manifest.permission.READ_CONTACTS}, PERMISSIONS_REQUEST_SYNC);
     }
 
     public void checkAndRequestCameraPermission() {
@@ -1570,13 +1575,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
 
     private void checkAndRequestPermission(String permission, int result) {
         int permissionGranted = getPackageManager().checkPermission(permission, getPackageName());
-        Log.i(
-                "[Permission] "
-                        + permission
-                        + " is "
-                        + (permissionGranted == PackageManager.PERMISSION_GRANTED
-                                ? "granted"
-                                : "denied"));
+        Log.i("[Permission] " + permission + " is " + (permissionGranted == PackageManager.PERMISSION_GRANTED ? "granted" : "denied"));
 
         if (!checkPermission(permission)) {
             Log.i("[Permission] Asking for " + permission);
@@ -1612,7 +1611,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
                 case ACCOUNT_SETTINGS:
                 case ABOUT:
                     hideTopBar(); // just in case
-                    LinphoneActivity.instance().goToDialerFragment();
+                    LinphoneActivity.instance().goToContactsFragment();
                     return true;
                 default:
                     break;
@@ -1642,7 +1641,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
         if (!getResources().getBoolean(R.bool.hide_assistant_from_side_menu)) {
             mSideMenuItems.add(
                     new MenuItem(
-                            getResources().getString(R.string.menu_assistant),
+                            getResources().getString(R.string.pref_add_account),
                             R.drawable.menu_assistant));
         }
         if (!getResources().getBoolean(R.bool.hide_settings_from_side_menu)) {
@@ -1692,7 +1691,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
                             LinphoneActivity.instance().displaySettings();
                         } else if (selectedItem.equals(getString(R.string.menu_about))) {
                             LinphoneActivity.instance().displayAbout();
-                        } else if (selectedItem.equals(getString(R.string.menu_assistant))) {
+                        } else if (selectedItem.equals(getString(R.string.pref_add_account))) {
                             LinphoneActivity.instance().displayAssistant();
                         }
                         if (getResources().getBoolean(R.bool.enable_in_app_purchase)) {

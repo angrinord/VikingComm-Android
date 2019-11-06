@@ -9,104 +9,42 @@
         android:id="@+id/top_bar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="?attr/lighToolbarBackgroundColor"
+        android:background="@color/toolbar_color"
         android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2">
-
-            <ImageView
-                android:id="@+id/all_contacts"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/button_background_drawable"
-                android:contentDescription="@string/content_description_all_contacts"
-                android:padding="15dp"
-                android:src="@drawable/contacts_all" />
-
-            <View
-                android:id="@+id/all_contacts_select"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_alignParentBottom="true"
-                android:background="?attr/accentColor" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:visibility="visible">
-
-            <ImageView
-                android:id="@+id/linphone_contacts"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/button_background_drawable"
-                android:contentDescription="@string/content_description_linphone_contacts"
-                android:gravity="center"
-                android:padding="15dp"
-                android:src="@drawable/contacts_sip"
-                android:visibility="gone" />
-
-            <View
-                android:id="@+id/linphone_contacts_select"
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:layout_alignParentBottom="true"
-                android:background="?attr/accentColor"
-                android:visibility="gone" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2" />
 
         <ImageView
             android:id="@+id/newContact"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
             android:background="?attr/button_background_drawable"
             android:contentDescription="@string/content_description_new_contact"
             android:padding="15dp"
-            android:src="@drawable/contact_add" />
+            android:scaleType="center"
+            android:src="@drawable/add_icon" />
+
+        <SearchView
+            android:id="@+id/searchField"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".6"
+            android:gravity="center"
+            android:iconifiedByDefault="false"
+            android:inputType="textVisiblePassword"
+            android:queryBackground="@color/transparent_color"
+            android:queryHint="@string/chat_room_creation_filter_hint" />
 
         <ImageView
             android:id="@+id/edit"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:background="?attr/button_background_drawable"
             android:contentDescription="@string/content_description_edit_list"
             android:padding="15dp"
-            android:src="@drawable/delete" />
+            android:src="@drawable/delete_selector" />
 
     </LinearLayout>
 
     <include layout="@layout/edit_list" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-
-        <SearchView
-            android:id="@+id/searchField"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:gravity="center"
-            android:iconifiedByDefault="false"
-            android:inputType="textPersonName"
-            android:paddingRight="5dp"
-            android:queryBackground="@color/transparent_color"
-            android:queryHint="@string/chat_room_creation_filter_hint"/>
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

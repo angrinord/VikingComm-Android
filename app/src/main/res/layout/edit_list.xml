@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/edit_list"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="?attr/lighToolbarBackgroundColor"
+    android:background="@color/toolbar_color"
     android:orientation="horizontal"
     android:visibility="gone">
 
@@ -11,7 +12,7 @@
         android:id="@+id/cancel"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.2"
+        android:layout_weight="0.21"
         android:background="?attr/button_background_drawable"
         android:contentDescription="@string/content_description_cancel_button"
         android:padding="15dp"
@@ -20,7 +21,7 @@
     <View
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.4" />
+        android:layout_weight="0.6" />
 
     <ImageView
         android:id="@+id/select_all"
@@ -45,12 +46,11 @@
 
     <ImageView
         android:id="@+id/delete"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="0.2"
         android:background="?attr/button_background_drawable"
         android:contentDescription="@string/content_description_delete_selection"
         android:padding="15dp"
-        android:src="@drawable/delete" />
+        android:src="@drawable/delete_selector" />
 
 </LinearLayout>

@@ -3,8 +3,8 @@
 
     <!-- URLs, URIs and domain -->
     <!-- Set the default domain used for account creation/addresses -->
-    <string name="default_domain" translatable="false">sip.linphone.org</string>
-    <string name="default_stun" translatable="false">stun.linphone.org</string>
+    <string name="default_domain" translatable="false">sip.myviking.com</string>
+    <string name="default_stun" translatable="false">stun.l.google.com:19302</string>
     <string name="default_conference_factory_uri" translatable="false">sip:conference-factory@sip.linphone.org</string>
     <string name="default_lime_x3dh_server_url" translatable="false">https://lime.linphone.org/lime-server/lime-server.php</string>
     <string name="rls_uri" translatable="false">sip:rls@sip.linphone.org</string>
@@ -118,10 +118,10 @@
     <bool name="display_contact_organization">true</bool>
     <bool name="hide_numbers_and_addresses_without_presence">false</bool>
     <bool name="hide_sip_contacts_without_presence">false</bool>
-    <bool name="hide_non_linphone_contacts">false</bool>
+    <bool name="hide_non_linphone_contacts">true</bool>
     <bool name="use_native_contact_editor">false</bool>
     <bool name="hide_invite_contact">false</bool>
-    <bool name="generate_text_avatar">true</bool>
+    <bool name="generate_text_avatar">false</bool>
     <bool name="only_show_address_username_if_matches_default_domain">true</bool>
 
     <!-- Side Menu -->

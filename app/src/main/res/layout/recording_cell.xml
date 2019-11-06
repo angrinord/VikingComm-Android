@@ -131,7 +131,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentBottom="true"
                 android:progressTint="?attr/accentColor"
-                android:thumbTint="?attr/accentColor" />
+                android:thumbTint="?attr/accentColor"
+                android:visibility="gone" />
 
         </RelativeLayout>
 

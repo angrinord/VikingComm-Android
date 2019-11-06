@@ -31,6 +31,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -53,9 +54,12 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.HashMap;
@@ -168,6 +172,7 @@ public class CallActivity extends LinphoneGenericActivity
         return sInstance != null;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -763,6 +768,7 @@ public class CallActivity extends LinphoneGenericActivity
         if (call == null) return;
 
         if (enable && !mIsRecording) {
+
             call.startRecording();
             Log.d("start call mRecording");
             mRecordCall.setSelected(true);
@@ -958,7 +964,6 @@ public class CallActivity extends LinphoneGenericActivity
     private void hangUp() {
         Core lc = LinphoneManager.getLc();
         Call currentCall = lc.getCurrentCall();
-
         if (mIsRecording) {
             toggleCallRecording(false);
         }

@@ -16,6 +16,10 @@
     <entry name="realm" overwrite="true"></entry>
     <entry name="conference_factory_uri" overwrite="true"></entry>
   </section>
+  <section name="nat_policy_default_values">
+    <entry name="stun_server" overwrite="true">stun.l.google.com:19302</entry>
+    <entry name="protocols" overwrite="true">stun,ice</entry>
+  </section>
   <section name="assistant">
     <entry name="domain" overwrite="true"></entry>
   </section>

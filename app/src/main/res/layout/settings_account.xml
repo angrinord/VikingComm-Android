@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:linphone="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundColor">
@@ -104,6 +105,7 @@
             android:id="@+id/pref_proxy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             linphone:hint="@string/pref_proxy"
             linphone:title="@string/pref_proxy" />
 
@@ -115,31 +117,18 @@
             linphone:title="@string/pref_enable_outbound_proxy" />
 
         <org.linphone.settings.widget.TextSetting
-            android:id="@+id/pref_stun_server"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            linphone:hint="@string/pref_stun_server"
-            linphone:title="@string/pref_stun_server" />
-
-        <org.linphone.settings.widget.SwitchSetting
-            android:id="@+id/pref_ice_enable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            linphone:title="@string/pref_ice_enable" />
-
-        <org.linphone.settings.widget.TextSetting
             android:id="@+id/pref_expire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             linphone:hint="@string/pref_expire_title"
             linphone:title="@string/pref_expire_title" />
 
-        <org.linphone.settings.widget.TextSetting
-            android:id="@+id/pref_prefix"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            linphone:hint="@string/pref_prefix"
-            linphone:title="@string/pref_prefix" />
+        <!--<org.linphone.settings.widget.TextSetting-->
+            <!--android:id="@+id/pref_prefix"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--linphone:hint="@string/pref_prefix"-->
+            <!--linphone:title="@string/pref_prefix" />-->
 
         <org.linphone.settings.widget.SwitchSetting
             android:id="@+id/pref_avpf"

@@ -1,7 +1,6 @@
 package org.linphone.utils;
 
 import android.content.Context;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,12 +95,7 @@ public class ScheduleAdapter extends SelectableAdapter<ScheduleAdapter.ViewHolde
             endTime = view.findViewById(R.id.end_time);
             scheduleIcon = view.findViewById(R.id.schedule_icon);
             daysField = view.findViewById(R.id.days_field);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                scheduleIcon.setImageResource(R.drawable.snooze_icon);
-            } else {
-                scheduleIcon.setImageResource(R.drawable.snooze_icon1);
-            }
+            scheduleIcon.setImageResource(R.drawable.snooze_icon);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
         }

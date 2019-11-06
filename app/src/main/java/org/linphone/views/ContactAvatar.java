@@ -34,24 +34,19 @@ import org.linphone.core.tools.Log;
 
 class ContactAvatarHolder {
     public final ImageView contactPicture;
-    public final ImageView avatarMask;
-    public final ImageView avatarBorder;
     public final ImageView securityLevel;
     public final TextView generatedAvatar;
 
     public ContactAvatarHolder(View v) {
         contactPicture = v.findViewById(R.id.contact_picture);
-        avatarMask = v.findViewById(R.id.mask);
         securityLevel = v.findViewById(R.id.security_level);
         generatedAvatar = v.findViewById(R.id.generated_avatar);
-        avatarBorder = v.findViewById(R.id.border);
     }
 
     public void init() {
         contactPicture.setVisibility(View.VISIBLE);
         generatedAvatar.setVisibility(View.VISIBLE);
         securityLevel.setVisibility(View.GONE);
-        avatarBorder.setVisibility(View.GONE);
     }
 }
 
@@ -124,12 +119,6 @@ public class ContactAvatar {
         }
         holder.securityLevel.setVisibility(View.GONE);
 
-        if (maskResource != 0) {
-            holder.avatarMask.setImageResource(maskResource);
-        }
-        if (showBorder) {
-            holder.avatarBorder.setVisibility(View.VISIBLE);
-        }
     }
 
     public static void displayAvatar(String displayName, View v, boolean showBorder) {
@@ -191,12 +180,6 @@ public class ContactAvatar {
             holder.generatedAvatar.setVisibility(View.VISIBLE);
         }
 
-        if (maskResource != 0) {
-            holder.avatarMask.setImageResource(maskResource);
-        }
-        if (showBorder) {
-            holder.avatarBorder.setVisibility(View.VISIBLE);
-        }
     }
 
     public static void displayAvatar(LinphoneContact contact, View v, boolean showBorder) {
@@ -226,7 +209,6 @@ public class ContactAvatar {
         holder.contactPicture.setImageResource(R.drawable.chat_group_avatar);
         holder.generatedAvatar.setVisibility(View.GONE);
         holder.securityLevel.setVisibility(View.GONE);
-        holder.avatarBorder.setVisibility(View.GONE);
     }
 
     public static void displayGroupChatAvatar(ChatRoomSecurityLevel level, View v) {

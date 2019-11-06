@@ -12,22 +12,15 @@
         android:background="@color/toolbar_color"
         android:orientation="horizontal">
 
-        <RelativeLayout
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/add_schedule"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="0.2">
-
-            <ImageView
-                android:id="@+id/add_schedule"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="?attr/button_background_drawable"
-                android:contentDescription="@string/content_description_all_contacts"
-                android:padding="15dp"
-                android:scaleType="center"
-                android:src="@drawable/add_icon" />
-
-        </RelativeLayout>
+            android:background="?attr/button_background_drawable"
+            android:contentDescription="@string/content_description_all_contacts"
+            android:padding="15dp"
+            android:scaleType="center"
+            android:src="@drawable/add_icon" />
 
         <View
             android:layout_width="0dp"
@@ -46,7 +39,7 @@
             android:id="@+id/edit"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"
+            android:layout_weight=".21"
             android:background="?attr/button_background_drawable"
             android:contentDescription="@string/content_description_edit_list"
             android:padding="15dp"
