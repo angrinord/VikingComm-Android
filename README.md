@@ -1,4 +1,4 @@
-[![pipeline status](https://gitlab.linphone.org/BC/public/linphone-sdk/badges/master/pipeline.svg)](https://github.com/angrinord/VikingComm-Android/commit//master)
+[![pipeline status](https://gitlab.linphone.org/BC/public/linphone-sdk/badges/master/pipeline.svg)](https://github.com/angrinord/VikingComm-Android/commits/master)
 
 Linphone is a free VoIP and video softphone based on the SIP protocol.
 
