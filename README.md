@@ -1,17 +1,7 @@
-[![pipeline status](https://gitlab.linphone.org/BC/public/linphone-sdk/badges/master/pipeline.svg)](https://github.com/angrinord/VikingComm-Android/commits/master)
 
-Linphone is a free VoIP and video softphone based on the SIP protocol.
+This is the free and open-source SIP Softphone developed by Viking Electronics and built on Linphone
 
 # What's new
-
-Now the default way of building linphone-android is to download the AAR SDK in our maven repository.
-Compared to previous versions, this project no longer uses submodules developper has to build in order to get a working app.
-However, if you wish to use a locally compiled SDK see below how to proceed.
-
-We offer different flavors for the SDK in our maven repository: org.linphone.no-video (a build without video) and org.linphone.legacy (old java wrapper if you didn't migrate your app code to the new one yet).
-
-The repository structure has also been cleaned and updated, and changing the package name can now be done in a single step.
-This allows developpers to keep a stable version as well as a developpment one on the same device easily.
 
 # Building the app
 
