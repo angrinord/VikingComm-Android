@@ -318,14 +318,14 @@ public class ContactEditorFragment extends Fragment {
             ContactAvatar.displayAvatar("", mView.findViewById(R.id.avatar_layout));
         }
 
-        mContactPicture.setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        pickImage();
-                        LinphoneActivity.instance().checkAndRequestCameraPermission();
-                    }
-                });
+//        mContactPicture.setOnClickListener(
+//                new OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        pickImage();
+//                        LinphoneActivity.instance().checkAndRequestCameraPermission();
+//                    }
+//                });
 
         mNumbersAndAddresses = new ArrayList<>();
         mSipAddresses = initSipAddressFields(mContact);

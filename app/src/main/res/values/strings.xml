@@ -640,4 +640,5 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pref_enable_peer_verification">Enable peer verification</string>
 </resources>

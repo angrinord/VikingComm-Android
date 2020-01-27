@@ -45,6 +45,7 @@ import org.linphone.LinphoneManager;
 import org.linphone.R;
 import org.linphone.core.Call;
 import org.linphone.core.CallLog;
+import org.linphone.utils.DividerItemDecorator;
 import org.linphone.utils.SelectableHelper;
 
 public class HistoryFragment extends Fragment implements OnClickListener, OnItemClickListener, HistoryViewHolder.ClickListener, ContactsUpdatedListener, SelectableHelper.DeleteListener {
@@ -74,10 +75,7 @@ public class HistoryFragment extends Fragment implements OnClickListener, OnItem
         mLayoutManager = new LinearLayoutManager(mContext);
         mHistoryList.setLayoutManager(mLayoutManager);
         // Divider between items
-        DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(
-                        mHistoryList.getContext(), mLayoutManager.getOrientation());
-        dividerItemDecoration.setDrawable(mContext.getResources().getDrawable(R.drawable.divider));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecorator(mHistoryList.getContext(), mLayoutManager.getOrientation());
         mHistoryList.addItemDecoration(dividerItemDecoration);
 
         mAllCalls = view.findViewById(R.id.all_calls);

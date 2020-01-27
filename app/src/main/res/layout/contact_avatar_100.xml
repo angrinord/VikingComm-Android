@@ -12,24 +12,6 @@
         android:adjustViewBounds="true"
         android:src="@drawable/avatar" />
 
-    <TextView
-        android:id="@+id/generated_avatar"
-        style="@style/generated_contact_avatar_100_font"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/generated_avatar_bg"
-        android:gravity="center"
-        android:maxLines="1" />
-
-    <ImageView
-        android:id="@+id/mask"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentLeft="true"
-        android:adjustViewBounds="true"
-        android:tint="?attr/backgroundColor" />
-
     <ImageView
         android:id="@+id/security_level"
         android:layout_width="20dp"

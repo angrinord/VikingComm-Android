@@ -38,10 +38,4 @@
         android:padding="5dp"
         android:src="@drawable/led_connected" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/dividerColor" />
-
 </RelativeLayout>

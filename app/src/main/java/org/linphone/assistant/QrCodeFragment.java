@@ -79,7 +79,9 @@ public class QrCodeFragment extends Fragment {
         AndroidCameraConfiguration.AndroidCamera[] cameras =
                 AndroidCameraConfiguration.retrieveCameras();
         for (AndroidCameraConfiguration.AndroidCamera androidCamera : cameras) {
-            if (!androidCamera.frontFacing) camId = androidCamera.id;
+            if (androidCamera.frontFacing){
+                camId = androidCamera.id;
+            }
         }
         String[] devices = LinphoneManager.getLc().getVideoDevicesList();
         String newDevice = devices[camId];

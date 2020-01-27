@@ -33,6 +33,8 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
+
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.io.IOException;
@@ -46,6 +48,7 @@ import org.linphone.LinphoneApp;
 import org.linphone.LinphoneService;
 import org.linphone.ScheduleInterval;
 import org.linphone.ScheduleObject;
+import org.linphone.utils.DividerItemDecorator;
 import org.linphone.utils.ScheduleAdapter;
 import org.joda.time.LocalTime;
 import org.linphone.LinphoneActivity;
@@ -77,6 +80,9 @@ public class ScheduleFragment extends Fragment implements OnClickListener, OnIte
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(mContext);
         scheduleList.setLayoutManager(mLayoutManager);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecorator(scheduleList.getContext(), mLayoutManager.getOrientation());
+        dividerItemDecoration.setDrawable(mContext.getResources().getDrawable(R.drawable.divider));
+        scheduleList.addItemDecoration(dividerItemDecoration);
 
         ImageView addSchedule = view.findViewById(R.id.add_schedule);
         addSchedule.setEnabled(true);

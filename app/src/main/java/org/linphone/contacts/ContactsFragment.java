@@ -43,6 +43,7 @@ import org.linphone.fragments.FragmentsAvailable;
 import org.linphone.LinphoneActivity;
 import org.linphone.LinphoneManager;
 import org.linphone.R;
+import org.linphone.utils.DividerItemDecorator;
 import org.linphone.utils.SelectableHelper;
 
 public class ContactsFragment extends Fragment
@@ -205,11 +206,7 @@ public class ContactsFragment extends Fragment
         mLayoutManager = new LinearLayoutManager(mContext);
         mContactsList.setLayoutManager(mLayoutManager);
 
-        DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(
-                        mContactsList.getContext(), mLayoutManager.getOrientation());
-        dividerItemDecoration.setDrawable(
-                getActivity().getResources().getDrawable(R.drawable.divider));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecorator(mContactsList.getContext(), mLayoutManager.getOrientation());
         mContactsList.addItemDecoration(dividerItemDecoration);
 
         return view;

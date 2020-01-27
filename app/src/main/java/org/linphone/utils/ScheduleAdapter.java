@@ -57,7 +57,7 @@ public class ScheduleAdapter extends SelectableAdapter<ScheduleAdapter.ViewHolde
         holder.select.setChecked(isSelected(position));
         final ScheduleObject schedule = mSchedules.get(position);
         if (schedule.isActive()) {
-            holder.scheduleIcon.setVisibility(isEditable() ? View.INVISIBLE : View.VISIBLE);
+            holder.scheduleIcon.setVisibility(View.VISIBLE);
             AlphaAnimation alpha = new AlphaAnimation(0.2F, 1F);
             alpha.setDuration(100);
             alpha.setFillAfter(true);
@@ -95,7 +95,7 @@ public class ScheduleAdapter extends SelectableAdapter<ScheduleAdapter.ViewHolde
             endTime = view.findViewById(R.id.end_time);
             scheduleIcon = view.findViewById(R.id.schedule_icon);
             daysField = view.findViewById(R.id.days_field);
-            scheduleIcon.setImageResource(R.drawable.snooze_icon);
+//            scheduleIcon.setImageResource(R.drawable.snooze_icon);
             view.setOnClickListener(this);
             view.setOnLongClickListener(this);
         }

@@ -40,6 +40,7 @@ import org.linphone.fragments.FragmentsAvailable;
 import org.linphone.LinphoneActivity;
 import org.linphone.LinphoneManager;
 import org.linphone.R;
+import org.linphone.utils.DividerItemDecorator;
 import org.linphone.utils.FileUtils;
 import org.linphone.utils.SelectableHelper;
 
@@ -84,10 +85,7 @@ public class RecordingsFragment extends Fragment
         mRecordingList.setLayoutManager(mLayoutManager);
 
         // Divider between items
-        DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(
-                        mRecordingList.getContext(), mLayoutManager.getOrientation());
-        dividerItemDecoration.setDrawable(mContext.getResources().getDrawable(R.drawable.divider));
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecorator(mRecordingList.getContext(), mLayoutManager.getOrientation());
         mRecordingList.addItemDecoration(dividerItemDecoration);
 
         mRecordings = new ArrayList<>();

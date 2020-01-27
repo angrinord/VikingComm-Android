@@ -78,6 +78,7 @@ public class AccountSettingsFragment extends Fragment {
             //mIce,
             mAvpf,
             mReplacePlusBy00,
+            mPeerVerification,
             mPush;
     private BasicSetting mChangePassword, mDeleteAccount, mLinkAccount;
     private ListSetting mTransport;
@@ -189,6 +190,8 @@ public class AccountSettingsFragment extends Fragment {
         mAvpf = mRootView.findViewById(R.id.pref_avpf);
 
         mReplacePlusBy00 = mRootView.findViewById(R.id.pref_escape_plus);
+
+        mPeerVerification = mRootView.findViewById(R.id.pref_enable_peer_verification);
 
         mPush = mRootView.findViewById(R.id.pref_push_notification);
         mPush.setVisibility(
@@ -473,8 +476,10 @@ public class AccountSettingsFragment extends Fragment {
                         if (mProxyConfig != null) {
                             mProxyConfig.edit();
                             if (newValue) {
+                                mProxy.setVisibility(View.VISIBLE);
                                 mProxyConfig.setRoute(mProxy.getValue());
                             } else {
+                                mProxy.setVisibility(View.GONE);
                                 mProxyConfig.setRoute(null);
                             }
                             mProxyConfig.done();
@@ -540,6 +545,19 @@ public class AccountSettingsFragment extends Fragment {
                         }
                     }
                 });
+
+        mPeerVerification.setListener(new SettingListenerBase(){
+            @Override
+            public void onBoolValueChanged(boolean newValue) {
+                Core core = LinphoneManager.getLcIfManagerNotDestroyedOrNull();
+                if( core != null){
+                    core.verifyServerCertificates(newValue);
+                    core.verifyServerCn(newValue);
+                    core.stop();
+                    core.start();
+                }
+            }
+        });
 
         mPush.setListener(
                 new SettingListenerBase() {
@@ -620,6 +638,12 @@ public class AccountSettingsFragment extends Fragment {
                         } else {
                             Log.e("[Account Settings] No proxy config !");
                         }
+                        if(newLabel.equals("TLS")){
+                            mPeerVerification.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            mPeerVerification.setVisibility(View.GONE);
+                        }
                     }
                 });
     }
@@ -666,6 +690,9 @@ public class AccountSettingsFragment extends Fragment {
             mDisplayName.setValue(identityAddress.getDisplayName());
 
             mProxy.setValue(mProxyConfig.getServerAddr());
+            if(mProxyConfig.getRoute() != null){
+                mProxy.setVisibility(View.VISIBLE);
+            }
 
             //mStun.setValue(natPolicy.getStunServer());
 
@@ -692,6 +719,8 @@ public class AccountSettingsFragment extends Fragment {
             mAvpf.setChecked(mProxyConfig.avpfEnabled());
 
             mReplacePlusBy00.setChecked(mProxyConfig.getDialEscapePlus());
+
+            mPeerVerification.setChecked(core.isVerifyingCertificates());
 
             mPush.setChecked(mProxyConfig.isPushNotificationAllowed());
 

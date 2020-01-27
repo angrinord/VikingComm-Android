@@ -8,19 +8,31 @@
     android:animationCache="true"
     android:paddingLeft="10dp">
 
+    <ImageView
+        android:id="@+id/schedule_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="42dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/snooze_icon" />
+
     <TextView
         android:id="@+id/fromView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="from"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/schedule_icon"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/begin_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/toView"
+        android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/fromView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,8 +40,8 @@
         android:id="@+id/toView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="to"
-        app:layout_constraintEnd_toStartOf="@+id/end_time"
         app:layout_constraintStart_toEndOf="@+id/begin_time"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,19 +49,9 @@
         android:id="@+id/end_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/schedule_icon"
+        android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/toView"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/schedule_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/footer_chat" />
 
     <CheckBox
         android:id="@+id/delete"
@@ -71,9 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:paddingLeft="10dp"
         android:text="days"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/schedule_icon"
         app:layout_constraintTop_toBottomOf="@+id/begin_time" />
 </androidx.constraintlayout.widget.ConstraintLayout>

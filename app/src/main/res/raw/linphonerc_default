@@ -7,14 +7,14 @@ sip_port=-1
 sip_tcp_port=-1
 sip_tls_port=-1
 srtp_crypto_suites=MS_AES_128_SHA1_80,MS_AES_128_SHA1_32
-verify_server_certs=1
-verify_server_cn=1
+# verify_server_certs=1
+# verify_server_cn=1
 
 [video]
 size=vga
 
 [app]
-tunnel=disabled
+tunnel=disable
 push_notification=1
 auto_start=1
 
