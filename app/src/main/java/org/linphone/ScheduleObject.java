@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Arrays;
 import org.joda.time.LocalTime;
 
+//Class representing an interval of time and a list of days of the week where calls are to be ignored.
 public class ScheduleObject implements Serializable {
-    private boolean[] days;
-    private ScheduleInterval interval;
-    private boolean active = true;
+    private boolean[] days;             //days on which the schedule is active
+    private ScheduleInterval interval;  //interval in which the schedule is active
+    private boolean active = true;      //Whether or not the schedule is active
 
+    //Instantiate with a list of days and an interval of time
+    //e.g. [True,False,False,False,False,False,True], ScheduleInterval{LocalTime.MIDNIGHT, LocalTime.MIDNIGHT} would block calls on weekends.
     public ScheduleObject(boolean[] d, ScheduleInterval i) {
         days = d;
         interval = i;
@@ -22,6 +25,8 @@ public class ScheduleObject implements Serializable {
         return interval;
     }
 
+    //Determine whether or not two ScheduleObjects overlap.
+    //i.e. whether or not they both cover some chunk of time
     public boolean overlap(ScheduleObject schedule) {
         if (schedule.getInterval().overlap(interval)) {
             for (int i = 0; i < 7; i++) {

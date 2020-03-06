@@ -21,6 +21,8 @@ import org.joda.time.LocalTime;
 import org.linphone.receivers.StartServiceReceiver;
 import org.linphone.receivers.StopServiceReceiver;
 
+
+//This class was created by Anthony to contain methods and variables related to snooze & scheduling feature that need to be accessible across the app.
 public class LinphoneApp extends Application{
     private LinkedList<ScheduleObject> schedule;
 
@@ -77,6 +79,7 @@ public class LinphoneApp extends Application{
         alarm.cancel(pIntent2);
     }
 
+    //Save Schedule Objects
     public void serializeSchedule() throws IOException {
         FileOutputStream fos = this.openFileOutput("schedule.ser", MODE_PRIVATE);
         ObjectOutputStream os = new ObjectOutputStream(fos);
@@ -84,6 +87,7 @@ public class LinphoneApp extends Application{
         os.close();
     }
 
+    //Retrieve Schedule Objects
     private void deserializeSchedule() throws IOException, ClassNotFoundException {
         FileInputStream fis = this.openFileInput("schedule.ser");
         ObjectInputStream is = new ObjectInputStream(fis);
@@ -92,7 +96,9 @@ public class LinphoneApp extends Application{
         fis.close();
     }
 
+
     public void startSnooze(){
+        //Add preference 'inSnooze' and set to true.  LinphoneService checks this preference when an incoming call is received.
         Log.i("START SNOOZE: ","called");
         SharedPreferences prefs = this.getSharedPreferences("snooze",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
@@ -100,17 +106,20 @@ public class LinphoneApp extends Application{
         editor.putLong("finishTime", DateTime.now().getMillis()+getSnoozeInterval()*60000);
         editor.commit();
 
+        //This is just used to show a toast message and change the snooze indicator.  It has no effect on whether or not a call is accepted.
         Intent intent = new Intent(this, StopServiceReceiver.class);
         intent.putExtra("startSnooze", true);
         sendBroadcast(intent);
 
-
+        //This section sets the alarm to broadcast to StartServiceReceiver when the snooze period is over.
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent2 = new Intent(this, StartServiceReceiver.class);
         intent2.putExtra("endSnooze",true);
         PendingIntent pIntent = PendingIntent.getBroadcast(this, 0, intent2, PendingIntent.FLAG_ONE_SHOT);
         alarm.set(AlarmManager.RTC_WAKEUP, DateTime.now().getMillis()+getSnoozeInterval()*60000, pIntent);
     }
+
+    //Prematurely end the snooze period
     public void stopSnooze(){
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, StartServiceReceiver.class);
@@ -132,7 +141,7 @@ public class LinphoneApp extends Application{
         editor.apply();
     }
 
-
+    //Takes a LocalTime object and passes the hour and minute to the private 'parseTime' function.
     public static String parseTime(LocalTime t) {
         if (t.getMillisOfSecond() == 999) {
             return parseTime(0, 0, true);
@@ -143,12 +152,15 @@ public class LinphoneApp extends Application{
         return parseTime(hour, minute, isInMorning);
     }
 
+    //This is just a function to format hours and minutes as a string.
     private static String parseTime(int hour, int minute, boolean isInMorning) {
+        //special case for midnight
         if (hour == 0 && minute == 0) {
             return "midnight";
         }
+
         String time;
-        if (DateFormat.is24HourFormat(LinphoneService.instance())) {
+        if (DateFormat.is24HourFormat(LinphoneService.instance())) {    //Checks phone preference for time formatting.
             if (isInMorning) {
                 time = hour + ":" + String.format("%02d", minute);
             } else {

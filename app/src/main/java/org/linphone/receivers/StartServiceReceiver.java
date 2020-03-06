@@ -10,6 +10,7 @@ import android.util.Log;
 import org.linphone.LinphoneActivity;
 import org.linphone.LinphoneService;
 
+//This class receives broadcasts and restarts Linphone service if it is not already active.
 public class StartServiceReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

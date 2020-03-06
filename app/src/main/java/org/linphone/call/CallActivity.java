@@ -98,6 +98,7 @@ import org.linphone.core.Player;
 import org.linphone.core.StreamType;
 import org.linphone.core.tools.Log;
 
+
 public class CallActivity extends LinphoneGenericActivity
         implements OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
     private static final int SECONDS_BEFORE_HIDING_CONTROLS = 4000;

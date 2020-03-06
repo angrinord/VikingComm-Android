@@ -1134,6 +1134,8 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
     @SuppressLint("Wakelock")
     public void onCallStateChanged(final Core lc, final Call call, final State state, final String message) {
         Log.i("[Manager] New call state [", state, "]");
+
+        //This checks whether or not the app is currently in snooze or a schedule interval.  If so, terminate the call.
         boolean shouldAcceptCalls = mServiceContext.shouldAcceptCalls();
         if (!shouldAcceptCalls&&(state == State.IncomingReceived || state == State.IncomingEarlyMedia)) {
             LinphoneManager.getLc().terminateCall(call);

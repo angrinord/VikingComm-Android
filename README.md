@@ -27,7 +27,7 @@ APK files are stored within ```./app/build/outputs/apk/debug/``` and ```./app/bu
 git clone https://gitlab.linphone.org/BC/public/linphone-sdk.git
 ```
 
-2. Build the SDK.  In linux, the commands should be something like this:
+2. Build the SDK.  (Consult the linphone-sdk/README for details and install dependencies.)  In linux, the commands should be something like this:
 ```
 ANDROID_SDK=/path/to/Android/Sdk
 ANDROID_NDK=/path/to/Android/Sdk/ndk-bundle
@@ -38,7 +38,6 @@ mkdir build
 cd build
 cmake .. -DLINPHONESDK_PLATFORM=Android -DENABLE_NON_FREE_CODECS=ON
 ```
-Consult the linphone-sdk/README for details and install dependencies.
 
 3. Pull the modified submodules (linphone and mediastreamer2.)  I'm not super confident in my git abilities, so I just use Intellij's git plugin.
 

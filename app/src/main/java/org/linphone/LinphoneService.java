@@ -574,6 +574,7 @@ public final class LinphoneService extends Service {
         return schedule;
     }
 
+    //Checks that whether or not snooze or a schedule interval are active.
     public boolean shouldAcceptCalls() {
         LinkedList<ScheduleObject> schedule = deserializeSchedule(getApplicationContext());
         int day = LocalDate.now().getDayOfWeek();
@@ -590,6 +591,6 @@ public final class LinphoneService extends Service {
         return shouldAcceptCall&&!prefs.getBoolean("inSnooze", false);
     }
 
-    //TODO Likely not needed
+    //TODO Not sure what I was doing with this.  Can probably be removed
     public synchronized void close() { blocked = true; }
 }

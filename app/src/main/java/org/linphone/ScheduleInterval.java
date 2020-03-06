@@ -5,12 +5,14 @@ import org.joda.time.LocalTime;
 
 import java.io.Serializable;
 
+//Class representing an interval of time in which calls are to be ignored.  Used by ScheduleObject.
 public class ScheduleInterval implements Serializable {
     private LocalTime intervalStart;
     private LocalTime intervalEnd;
     public boolean isAllDay = false;
 
     public ScheduleInterval(LocalTime t1, LocalTime t2) throws Exception {
+        //Special case where start and end times are both midnight.  This means ignore calls for the entire day.
         if (t1.equals(LocalTime.MIDNIGHT) && t2.equals(LocalTime.MIDNIGHT)) {
             isAllDay = true;
         }
@@ -47,6 +49,7 @@ public class ScheduleInterval implements Serializable {
         }
     }
 
+    //Determine whether or not the given LocalTime 't' is within this ScheduleInterval.
     public boolean shouldAcceptCall(LocalTime t) {
         if (isAllDay) {
             return false;
@@ -57,6 +60,7 @@ public class ScheduleInterval implements Serializable {
         return true;
     }
 
+    //Determine whether or not the given ScheduleInterval 'i' overlaps with this ScheduleInterval.
     public boolean overlap(ScheduleInterval i) {
         boolean startBetween =
                 ((i.getIntervalStart().compareTo(intervalStart) <= 0)
