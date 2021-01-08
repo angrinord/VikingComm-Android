@@ -54,7 +54,6 @@ public class CallManager {
         Core lc = LinphoneManager.getLc();
 
         CallParams params = lc.createCallParams(null);
-        String test = params.getVideoDirection().toString();
         getBandwidthManager().updateWithProfileSettings(params);
 
         if (videoEnabled && params.videoEnabled()) {

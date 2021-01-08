@@ -68,12 +68,15 @@ public class LoginFragment extends Fragment implements OnClickListener, TextWatc
         mApply.setOnClickListener(this);
         mScanner = view.findViewById(R.id.qr_button);
         mScanner.setOnClickListener(this);
+        String logstr = "QR Scanner";
+        Bundle args = getArguments();
         try{
-            mDomain.setText(getArguments().getString("url", ""));
-            if(getArguments().getBoolean("multi")){
+            Log.i(logstr, args.toString());
+            mDomain.setText(args.getString("url", ""));
+            if(args.getBoolean("multi")){
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                 builder.setTitle("Choose a user");
-                JSONArray creds = new JSONArray(getArguments().getString("passes", ""));
+                JSONArray creds = new JSONArray(args.getString("passes", ""));
                 final ArrayList<String> users = new ArrayList<>();
                 final ArrayList<String> passes = new ArrayList<>();
                 boolean end = false;
@@ -81,7 +84,7 @@ public class LoginFragment extends Fragment implements OnClickListener, TextWatc
                 while(!end){
                     try{
                         JSONObject obj = creds.getJSONObject(i);
-                        users.add(getArguments().getString("num", "user") + 'u' + i);
+                        users.add(args.getString("num", "user") + 'u' + i);
                         passes.add(obj.getString(Integer.toString(i)));
                         i++;
                     }
@@ -104,13 +107,13 @@ public class LoginFragment extends Fragment implements OnClickListener, TextWatc
                 dialog.show();
             }
             else{
-                mPassword.setText(getArguments().getString("pass", ""));
-                mLogin.setText(getArguments().getString("num", ""));
-                mUserid.setText(getArguments().getString("num", ""));
+                mPassword.setText(args.getString("pass", ""));
+                mLogin.setText(args.getString("num", ""));
+                mUserid.setText(args.getString("num", ""));
             }
         }
         catch (Exception e){
-            Log.e("QR scanner", e.toString());
+            Log.e(logstr, e.toString());
         }
 
         return view;
@@ -164,6 +167,7 @@ public class LoginFragment extends Fragment implements OnClickListener, TextWatc
 
         }
         else if(id == R.id.qr_button){
+            Log.i("QR Scanner", "Starting");
             AssistantActivity.instance().displayQRCodeReader();
         }
     }

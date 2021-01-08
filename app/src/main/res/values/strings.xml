@@ -39,7 +39,7 @@
     <string name="schedule_delete_dialog" translatable="false">Are you sure you want to delete these schedule items?</string>
 
     <!-- Custom -->
-    <string name="app_name">Viking Softphone</string>
+    <string name="app_name">Viking X Demo</string>
     <string name="service_name">Viking Service</string>
     <string name="addressbook_label">Viking</string>
     <string name="notification_title">Viking</string>

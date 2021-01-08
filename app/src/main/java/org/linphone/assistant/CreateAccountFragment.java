@@ -800,4 +800,9 @@ public class CreateAccountFragment extends Fragment
 
     @Override
     public void onUpdateAccount(AccountCreator accountCreator, Status status, String resp) {}
+
+    @Override
+    public void onLoginLinphoneAccount(AccountCreator creator, Status status, String resp) {
+
+    }
 }

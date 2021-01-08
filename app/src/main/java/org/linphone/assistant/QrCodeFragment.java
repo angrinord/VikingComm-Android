@@ -21,6 +21,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.TextureView;
 import android.view.View;
@@ -76,8 +77,7 @@ public class QrCodeFragment extends Fragment {
 
     private void setBackCamera() {
         int camId = 0;
-        AndroidCameraConfiguration.AndroidCamera[] cameras =
-                AndroidCameraConfiguration.retrieveCameras();
+        AndroidCameraConfiguration.AndroidCamera[] cameras = AndroidCameraConfiguration.retrieveCameras();
         for (AndroidCameraConfiguration.AndroidCamera androidCamera : cameras) {
             if (androidCamera.frontFacing){
                 camId = androidCamera.id;
@@ -85,7 +85,13 @@ public class QrCodeFragment extends Fragment {
         }
         String[] devices = LinphoneManager.getLc().getVideoDevicesList();
         String newDevice = devices[camId];
-        LinphoneManager.getLc().setVideoDevice(newDevice);
+        try{
+                Log.i("QR Scanner", "Trying to set " + newDevice + " as video device");
+                LinphoneManager.getLc().setVideoDevice(newDevice);
+                }
+        catch (Exception e){
+            Log.e("QR Scanner", "devices detected:" + devices);
+        }
     }
 
     private void launchQrcodeReader() {

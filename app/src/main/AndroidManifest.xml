@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.linphone"
     android:installLocation="auto"
-    android:versionName="0.2.9">
+    android:versionName="0.3.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -33,7 +33,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.READ_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
-    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" /> <!-- Needed for in-app purchase -->
+<!--    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" /> &lt;!&ndash; Needed for in-app purchase &ndash;&gt;-->
     <!-- <uses-permission android:name="com.android.vending.BILLING"/> -->
     <!-- Needed for overlay widget and floating notifications -->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- Needed for kill application yourself -->
@@ -172,14 +172,14 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".purchase.InAppPurchaseActivity"
-            android:screenOrientation="nosensor"
-            android:theme="@style/LinphoneStyleLight">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+<!--        <activity-->
+<!--            android:name=".purchase.InAppPurchaseActivity"-->
+<!--            android:screenOrientation="nosensor"-->
+<!--            android:theme="@style/LinphoneStyleLight">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity
             android:name=".assistant.RemoteProvisioningLoginActivity"
             android:screenOrientation="nosensor"

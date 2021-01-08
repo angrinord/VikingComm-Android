@@ -69,6 +69,7 @@ import java.util.TimerTask;
 
 import org.linphone.LinphoneActivity;
 import org.linphone.LinphoneManager;
+import org.linphone.LinphoneService;
 import org.linphone.R;
 import org.linphone.compatibility.Compatibility;
 import org.linphone.contacts.ContactsManager;
@@ -97,6 +98,7 @@ import org.linphone.core.PayloadType;
 import org.linphone.core.Player;
 import org.linphone.core.StreamType;
 import org.linphone.core.tools.Log;
+
 
 
 public class CallActivity extends LinphoneGenericActivity
@@ -717,7 +719,15 @@ public class CallActivity extends LinphoneGenericActivity
         } else if (id == R.id.hang_up) {
             hangUp();
         } else if (id == R.id.dialer) {
-            hideOrDisplayNumpad();
+            if (!LinphoneService.isReady()) return;
+            Core lc = LinphoneManager.getLc();
+            lc.stopDtmf();
+            if (lc.inCall()) {
+                lc.getCurrentCall().sendDtmfs("**");
+                lc.playDtmf('*', 1);
+                displayCustomToast("Activating Relay", Toast.LENGTH_SHORT);
+            }
+//            hideOrDisplayNumpad();
         } else if (id == R.id.chat) {
             goToChatList();
         } else if (id == R.id.conference) {
@@ -1507,11 +1517,11 @@ public class CallActivity extends LinphoneGenericActivity
         }
 
         // Paused by remote
-        if (pausedCalls.size() == 1) {
-            displayCallPaused(true);
-        } else {
-            displayCallPaused(false);
-        }
+//        if (pausedCalls.size() == 1) {
+//            displayCallPaused(true);
+//        } else {
+//            displayCallPaused(false);
+//        }
     }
 
     // Conference

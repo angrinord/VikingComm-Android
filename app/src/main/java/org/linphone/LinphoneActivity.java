@@ -20,6 +20,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -56,51 +57,16 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
+import org.linphone.LinphoneManager.AddressType;
 import org.linphone.assistant.AssistantActivity;
 import org.linphone.assistant.RemoteProvisioningLoginActivity;
-import org.linphone.chat.ImdnOldFragment;
-import org.linphone.compatibility.Compatibility;
-import org.linphone.contacts.ContactAddress;
-import org.linphone.contacts.ContactDetailsFragment;
-import org.linphone.contacts.ContactEditorFragment;
-import org.linphone.contacts.ContactsFragment;
-import org.linphone.contacts.ContactsManager;
-import org.linphone.contacts.LinphoneContact;
-import org.linphone.contacts.LinphoneNumberOrAddress;
-import org.linphone.fragments.AboutFragment;
-import org.linphone.fragments.DialerFragment;
-import org.linphone.fragments.EmptyFragment;
-import org.linphone.fragments.FragmentsAvailable;
-import org.linphone.fragments.ScheduleFragment;
-import org.linphone.fragments.StatusFragment;
-import org.linphone.history.HistoryDetailFragment;
-import org.linphone.history.HistoryFragment;
-import org.linphone.purchase.InAppPurchaseActivity;
-import org.linphone.recording.RecordingsFragment;
-import org.linphone.settings.AccountSettingsFragment;
-import org.linphone.settings.AudioSettingsFragment;
-import org.linphone.settings.LinphonePreferences;
-import org.linphone.settings.SettingsFragment;
-import org.linphone.utils.DeviceUtils;
-import org.linphone.utils.IntentUtils;
-import org.linphone.utils.LinphoneGenericActivity;
-import org.linphone.utils.PushNotificationUtils;
-import org.linphone.views.AddressText;
-import org.linphone.xmlrpc.XmlRpcHelper;
-import org.linphone.xmlrpc.XmlRpcListenerBase;
-import org.linphone.LinphoneManager.AddressType;
 import org.linphone.call.CallActivity;
 import org.linphone.call.CallIncomingActivity;
 import org.linphone.call.CallOutgoingActivity;
@@ -110,6 +76,15 @@ import org.linphone.chat.ChatRoomsFragment;
 import org.linphone.chat.DevicesFragment;
 import org.linphone.chat.GroupInfoFragment;
 import org.linphone.chat.ImdnFragment;
+import org.linphone.chat.ImdnOldFragment;
+import org.linphone.compatibility.Compatibility;
+import org.linphone.contacts.ContactAddress;
+import org.linphone.contacts.ContactDetailsFragment;
+import org.linphone.contacts.ContactEditorFragment;
+import org.linphone.contacts.ContactsFragment;
+import org.linphone.contacts.ContactsManager;
+import org.linphone.contacts.LinphoneContact;
+import org.linphone.contacts.LinphoneNumberOrAddress;
 import org.linphone.core.Address;
 import org.linphone.core.AuthInfo;
 import org.linphone.core.Call;
@@ -124,7 +99,34 @@ import org.linphone.core.ProxyConfig;
 import org.linphone.core.Reason;
 import org.linphone.core.RegistrationState;
 import org.linphone.core.tools.Log;
+import org.linphone.fragments.AboutFragment;
+import org.linphone.fragments.DialerFragment;
+import org.linphone.fragments.EmptyFragment;
+import org.linphone.fragments.FragmentsAvailable;
+import org.linphone.fragments.ScheduleFragment;
+import org.linphone.fragments.StatusFragment;
+import org.linphone.history.HistoryDetailFragment;
+import org.linphone.history.HistoryFragment;
+import org.linphone.recording.RecordingsFragment;
+import org.linphone.settings.AccountSettingsFragment;
+import org.linphone.settings.AudioSettingsFragment;
+import org.linphone.settings.LinphonePreferences;
+import org.linphone.settings.SettingsFragment;
+import org.linphone.utils.DeviceUtils;
+import org.linphone.utils.IntentUtils;
+import org.linphone.utils.LinphoneGenericActivity;
 import org.linphone.utils.LinphoneUtils;
+import org.linphone.utils.PushNotificationUtils;
+import org.linphone.views.AddressText;
+import org.linphone.xmlrpc.XmlRpcHelper;
+import org.linphone.xmlrpc.XmlRpcListenerBase;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class LinphoneActivity extends LinphoneGenericActivity
         implements OnClickListener, ActivityCompat.OnRequestPermissionsResultCallback {
@@ -181,6 +183,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
         throw new RuntimeException("LinphoneActivity not instantiated yet");
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // This must be done before calling super.onCreate().
@@ -1064,7 +1067,7 @@ public class LinphoneActivity extends LinphoneGenericActivity
     }
 
     private void displayInapp() {
-        startActivity(new Intent(LinphoneActivity.this, InAppPurchaseActivity.class));
+//        startActivity(new Intent(LinphoneActivity.this, InAppPurchaseActivity.class));
     }
 
     public void goToChatCreator(

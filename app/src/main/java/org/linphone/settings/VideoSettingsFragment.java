@@ -247,9 +247,11 @@ public class VideoSettingsFragment extends Fragment {
         Core core = LinphoneManager.getLcIfManagerNotDestroyedOrNull();
         if (core != null) {
             for (final PayloadType pt : core.getVideoPayloadTypes()) {
-                if (videoCodecs.contains(pt.getMimeType())) {
+                String mimeType = pt.getMimeType();
+                Boolean enabled = pt.enabled();
+                if (videoCodecs.contains(mimeType)) {
                     final SwitchSetting codec = new SwitchSetting(getActivity());
-                    codec.setTitle(pt.getMimeType());
+                    codec.setTitle(mimeType);
                     if (pt.enabled()) {
                         // Never use codec.setChecked(pt.enabled) !
                         codec.setChecked(true);

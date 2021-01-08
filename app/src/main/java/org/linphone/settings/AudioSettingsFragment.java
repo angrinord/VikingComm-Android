@@ -230,9 +230,10 @@ public class AudioSettingsFragment extends Fragment {
         Core core = LinphoneManager.getLcIfManagerNotDestroyedOrNull();
         if (core != null) {
             for (final PayloadType pt : core.getAudioPayloadTypes()) {
-
                 String mimeType = pt.getMimeType();
+                Boolean enabled = pt.enabled();
                 if (audioCodecs.contains(mimeType)) {
+                    audioCodecs.remove(mimeType);
                     final SwitchSetting codec = new SwitchSetting(getActivity());
                     codec.setTitle(pt.getMimeType());
                     /* Special case */

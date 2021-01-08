@@ -224,4 +224,9 @@ public class CreateAccountCodeActivationFragment extends Fragment
     @Override
     public void onUpdateAccount(
             AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+
+    @Override
+    public void onLoginLinphoneAccount(AccountCreator creator, AccountCreator.Status status, String resp) {
+
+    }
 }

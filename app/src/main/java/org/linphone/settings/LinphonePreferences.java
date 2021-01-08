@@ -28,7 +28,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 import org.linphone.compatibility.Compatibility;
 import org.linphone.LinphoneActivity;
@@ -47,7 +46,6 @@ import org.linphone.core.Tunnel;
 import org.linphone.core.TunnelConfig;
 import org.linphone.core.VideoActivationPolicy;
 import org.linphone.core.tools.Log;
-import org.linphone.purchase.Purchasable;
 import org.linphone.utils.LinphoneUtils;
 
 public class LinphonePreferences {
@@ -861,39 +859,6 @@ public class LinphonePreferences {
         return getConfig().getString("in-app-purchase", "server_url", null);
     }
 
-    public Purchasable getInAppPurchasedItem() {
-        String id = getConfig().getString("in-app-purchase", "purchase_item_id", null);
-        String payload = getConfig().getString("in-app-purchase", "purchase_item_payload", null);
-        String signature =
-                getConfig().getString("in-app-purchase", "purchase_item_signature", null);
-        String username = getConfig().getString("in-app-purchase", "purchase_item_username", null);
-
-        return new Purchasable(id).setPayloadAndSignature(payload, signature).setUserData(username);
-    }
-
-    public void setInAppPurchasedItem(Purchasable item) {
-        if (item == null) return;
-
-        getConfig().setString("in-app-purchase", "purchase_item_id", item.getId());
-        getConfig().setString("in-app-purchase", "purchase_item_payload", item.getPayload());
-        getConfig()
-                .setString(
-                        "in-app-purchase", "purchase_item_signature", item.getPayloadSignature());
-        getConfig().setString("in-app-purchase", "purchase_item_username", item.getUserData());
-    }
-
-    public ArrayList<String> getInAppPurchasables() {
-        ArrayList<String> purchasables = new ArrayList<>();
-        String list = getConfig().getString("in-app-purchase", "purchasable_items_ids", null);
-        if (list != null) {
-            for (String purchasable : list.split(";")) {
-                if (purchasable.length() > 0) {
-                    purchasables.add(purchasable);
-                }
-            }
-        }
-        return purchasables;
-    }
 
     public String getXmlrpcUrl() {
         return getConfig().getString("assistant", "xmlrpc_url", null);

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 static def getPackageName() {
-    return "org.VikingSoftphone"
+    return "org.VikingXDemo"
 }
 
 static def firebaseEnabled() {
@@ -68,12 +68,12 @@ android {
         abortOnError false
     }
 
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 20011
-        versionName "0.2.11"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 30001
+        versionName "0.3.1"
         applicationId getPackageName()
         multiDexEnabled true
         manifestPlaceholders = [linphone_address_mime_type: "vnd.android.cursor.item/vnd." + getPackageName() + ".provider.sip_address"]

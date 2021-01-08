@@ -632,6 +632,7 @@ public class AssistantActivity extends ThemableActivity
         if (getPackageManager().checkPermission(Manifest.permission.CAMERA, getPackageName()) != PackageManager.PERMISSION_GRANTED) {
             checkAndRequestVideoPermission();
         } else {
+            Log.i("QR Scanner", "restarting core to implement permission");
             LinphoneManager.getInstance().restartCore();  //Core needs to be restarted for granted permissions to take effect
             mFragment = new QrCodeFragment();
             changeFragment(mFragment);
@@ -881,6 +882,11 @@ public class AssistantActivity extends ThemableActivity
     @Override
     public void onUpdateAccount(
             AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+
+    @Override
+    public void onLoginLinphoneAccount(AccountCreator creator, AccountCreator.Status status, String resp) {
+
+    }
 
     public CountryListAdapter getCountryListAdapter() {
         return mCountryListAdapter;

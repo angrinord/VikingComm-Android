@@ -202,6 +202,7 @@
                 app:srcCompat="@raw/tiny_logo"
                 tools:visibility="visible" />
 
+
             <LinearLayout
                 android:id="@+id/menu"
                 android:layout_width="wrap_content"
@@ -390,7 +391,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.25"
                         android:adjustViewBounds="false"
-                        android:background="@color/dark_grey_color"
+                        android:background="@color/green_color"
                         android:contentDescription="@string/content_description_numpad"
                         android:cropToPadding="true"
                         android:scaleType="center"

@@ -1271,6 +1271,11 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
     public void onChatRoomStateChanged(Core lc, ChatRoom cr, ChatRoom.State state) {}
 
     @Override
+    public void onChatRoomSubjectChanged(Core lc, ChatRoom cr) {
+
+    }
+
+    @Override
     public void onQrcodeFound(Core lc, String result) {}
 
     public void onCallEncryptionChanged(Core lc, Call call, boolean encrypted, String authenticationToken) {}
@@ -1799,6 +1804,11 @@ public class LinphoneManager implements CoreListener, SensorEventListener, Accou
 
     @Override
     public void onUpdateAccount(AccountCreator accountCreator, AccountCreator.Status status, String resp) {}
+
+    @Override
+    public void onLoginLinphoneAccount(AccountCreator creator, AccountCreator.Status status, String resp) {
+
+    }
 
     private void updateMissedChatCount() {
         for (ChatRoom cr : LinphoneManager.getLc().getChatRooms()) {
